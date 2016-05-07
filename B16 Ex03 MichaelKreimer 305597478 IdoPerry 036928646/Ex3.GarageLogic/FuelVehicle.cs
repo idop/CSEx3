@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex3.GarageLogic
+namespace Ex03.GarageLogic
 {
     public class FuelVehicle : Vehicle
     {

@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex3.GarageLogic\Ex3.GarageLogic.csproj">
+    <ProjectReference Include="..\Ex3.GarageLogic\Ex03.GarageLogic.csproj">
       <Project>{e70cb656-b8cc-47da-88c0-64d981bb54b6}</Project>
-      <Name>Ex3.GarageLogic</Name>
+      <Name>Ex03.GarageLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

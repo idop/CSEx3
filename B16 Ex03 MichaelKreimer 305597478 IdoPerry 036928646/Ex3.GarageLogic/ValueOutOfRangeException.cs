@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex3.GarageLogic
+namespace Ex03.GarageLogic
 {
     class ValueOutOfRangeException : Exception
     {

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex3.GarageLogic
+namespace Ex03.GarageLogic
 {
     public class Vehicle
     {
         private string m_ModelName;
 
-        private string ModelName
+        public string ModelName
         {
             get
             {
@@ -33,6 +33,22 @@ namespace Ex3.GarageLogic
 
         private List<Tier> m_Tiers;
 
+        public int NumberOfTiers
+        {
+            get
+            {
+                return m_Tiers.Count;
+            }
+        }
+
+        public List<Tier> Tiers 
+        {
+            get
+            {
+                return m_Tiers;
+            }
+        }
+
         public override int GetHashCode()
         {
             return m_LicensePlate.GetHashCode();
@@ -45,7 +61,7 @@ namespace Ex3.GarageLogic
             m_Tiers = new List<Tier>(i_NumberOfTires);
             for (int i = 0; i < i_NumberOfTires; ++i)
             {
-                m_Tiers[i] = i_Tier.Clone() ;
+                m_Tiers.Add(i_Tier.Clone()) ;
             }
 
         }
