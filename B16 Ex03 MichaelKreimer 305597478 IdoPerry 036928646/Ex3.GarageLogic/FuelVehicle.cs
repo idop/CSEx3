@@ -33,6 +33,7 @@ namespace Ex3.GarageLogic
         {
             r_FuelType = i_FuelType;
             r_MaxFuelTankCapacity = i_MaxFuelTankCapacity;
+            m_CurrentFuelAmount = 0;
             Refuel(i_InitalFuelAmount, i_FuelType);
         }
 

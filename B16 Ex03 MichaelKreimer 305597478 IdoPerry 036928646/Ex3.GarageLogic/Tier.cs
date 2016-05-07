@@ -7,7 +7,6 @@ namespace Ex3.GarageLogic
     public class Tier
     {
         private const int k_MinValueAllowed = 0;
-        private const string k_ValueOutOfRangeMessage = "Adding {0} to current {1} air pressure excceds {3) the Max allowed";
         private string m_ManufacturerName;
 
         public string ManufacturerName
@@ -34,6 +33,14 @@ namespace Ex3.GarageLogic
         {
             m_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
+        }
+
+        public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
+        {
+            m_ManufacturerName = i_ManufacturerName;
+            r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
+            m_CurrentAirPressure = 0;
+            AddAirPressure(i_StartingAirPressure);
         }
 
         public void AddAirPressure(float i_AirToAdd)
