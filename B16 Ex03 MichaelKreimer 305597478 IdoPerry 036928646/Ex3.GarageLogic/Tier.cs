@@ -7,13 +7,13 @@ namespace Ex3.GarageLogic
     public class Tier
     {
         private const int k_MinValueAllowed = 0;
-        private string m_ManufacturerName;
-
+        private readonly string r_ManufacturerName;
+    
         public string ManufacturerName
         {
             get
             {
-                return m_ManufacturerName;
+                return r_ManufacturerName;
             }
         }
 
@@ -31,13 +31,13 @@ namespace Ex3.GarageLogic
 
         public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure)
         {
-            m_ManufacturerName = i_ManufacturerName;
+            r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
         }
 
         public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
         {
-            m_ManufacturerName = i_ManufacturerName;
+            r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
             m_CurrentAirPressure = 0;
             AddAirPressure(i_StartingAirPressure);
