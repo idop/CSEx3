@@ -6,5 +6,6 @@ namespace Ex3.GarageLogic
 {
     class Garage
     {
+       
     }
 }
