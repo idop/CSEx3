@@ -37,6 +37,5 @@ namespace Ex3.GarageLogic
         }
 
         private List<Tier> Tiers;
-        private Engine m_Engine;
     }
 }

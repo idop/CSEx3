@@ -4,11 +4,7 @@ using System.Text;
 
 namespace Ex3.GarageLogic
 {
-    class ElectricEngine : Engine
+    public static class TruckModels 
     {
-        public override void Charge(params object[] args)
-        {
-
-        }
     }
 }

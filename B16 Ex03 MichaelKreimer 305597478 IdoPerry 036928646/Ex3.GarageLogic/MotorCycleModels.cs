@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Ex3.GarageLogic
 {
-    public abstract class Engine
+    public static class MotorCycleModels 
     {
-        public abstract void Charge(params object[] args);
     }
 }
