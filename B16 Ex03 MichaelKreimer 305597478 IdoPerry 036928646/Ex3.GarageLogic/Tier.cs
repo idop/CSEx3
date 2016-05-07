@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex3.GarageLogic
+namespace Ex03.GarageLogic
 {
     public class Tier
     {
-        private const string k_ValueOutOfRangeMessage = "Adding {0} to current {1} air pressure excceds {3) the maximum allowed";
-        private string m_ManufacturerName;
-
+        private const int k_MinValueAllowed = 0;
+        private readonly string r_ManufacturerName;
+    
         public string ManufacturerName
         {
             get
             {
-                return m_ManufacturerName;
+                return r_ManufacturerName;
             }
         }
 
@@ -31,22 +31,35 @@ namespace Ex3.GarageLogic
 
         public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure)
         {
-            m_ManufacturerName = i_ManufacturerName;
+            r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
+        }
+
+        public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
+        {
+            r_ManufacturerName = i_ManufacturerName;
+            r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
+            m_CurrentAirPressure = 0;
+            AddAirPressure(i_StartingAirPressure);
         }
 
         public void AddAirPressure(float i_AirToAdd)
         {
             float newAirPressure = i_AirToAdd + m_CurrentAirPressure;
-            if(newAirPressure > r_MaxAllowedAirPressure)
+            if (newAirPressure > r_MaxAllowedAirPressure)
             {
                 m_CurrentAirPressure = newAirPressure;
             }
             else
             {
-                throw new ValueOutOfRangeException(string.Format(k_ValueOutOfRangeMessage, i_AirToAdd ,m_CurrentAirPressure, r_MaxAllowedAirPressure));
+                float maxValueAllowd = r_MaxAllowedAirPressure - m_CurrentAirPressure;
+                throw new ValueOutOfRangeException(k_MinValueAllowed, maxValueAllowd);
             }
+        }
 
+        public Tier Clone()
+        {
+            return MemberwiseClone() as Tier;
         }
     }
 }
