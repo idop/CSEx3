@@ -6,7 +6,8 @@ namespace Ex3.GarageLogic
 {
     public class Tier
     {
-        private const string k_ValueOutOfRangeMessage = "Adding {0} to current {1} air pressure excceds {3) the maximum allowed";
+        private const int k_MinValueAllowed = 0;
+        private const string k_ValueOutOfRangeMessage = "Adding {0} to current {1} air pressure excceds {3) the Max allowed";
         private string m_ManufacturerName;
 
         public string ManufacturerName
@@ -38,15 +39,20 @@ namespace Ex3.GarageLogic
         public void AddAirPressure(float i_AirToAdd)
         {
             float newAirPressure = i_AirToAdd + m_CurrentAirPressure;
-            if(newAirPressure > r_MaxAllowedAirPressure)
+            if (newAirPressure > r_MaxAllowedAirPressure)
             {
                 m_CurrentAirPressure = newAirPressure;
             }
             else
             {
-                throw new ValueOutOfRangeException(string.Format(k_ValueOutOfRangeMessage, i_AirToAdd ,m_CurrentAirPressure, r_MaxAllowedAirPressure));
+                float maxValueAllowd = r_MaxAllowedAirPressure - m_CurrentAirPressure;
+                throw new ValueOutOfRangeException(k_MinValueAllowed, maxValueAllowd);
             }
+        }
 
+        public Tier Clone()
+        {
+            return MemberwiseClone() as Tier;
         }
     }
 }
