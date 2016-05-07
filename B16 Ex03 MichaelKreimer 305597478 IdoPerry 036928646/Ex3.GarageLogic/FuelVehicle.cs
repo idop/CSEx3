@@ -21,14 +21,14 @@ namespace Ex03.GarageLogic
         private float m_CurrentFuelAmount = 0;
         private readonly float r_MaxFuelTankCapacity;
 
-        public FuelVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity)
+        public FuelVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity)
             : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier) 
         {
             r_FuelType = i_FuelType;
             r_MaxFuelTankCapacity = i_MaxFuelTankCapacity;
         }
 
-        public FuelVehicle(string i_ModelName, string i_LicensePlate ,int i_NumberOfTires, Tier i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
+        public FuelVehicle(string i_ModelName, string i_LicensePlate ,int i_NumberOfTires, Tire i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
             : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier)
         {
             r_FuelType = i_FuelType;

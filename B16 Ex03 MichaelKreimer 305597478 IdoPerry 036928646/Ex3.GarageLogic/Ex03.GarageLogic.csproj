@@ -41,7 +41,7 @@
     <Compile Include="MotorCycleModels.cs" />
     <Compile Include="CarModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tier.cs" />
+    <Compile Include="Tire.cs" />
     <Compile Include="TruckModels.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />

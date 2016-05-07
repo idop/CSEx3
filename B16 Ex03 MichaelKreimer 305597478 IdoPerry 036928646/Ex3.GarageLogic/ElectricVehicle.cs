@@ -10,13 +10,13 @@ namespace Ex03.GarageLogic
         private float m_CurrentHoursOfPower = 0;
         private readonly float r_MaxHoursOfPower;
 
-        public ElectricVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, float i_MaxHoursOfPower)
+        public ElectricVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tier, float i_MaxHoursOfPower)
             : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier)
         {
             r_MaxHoursOfPower = i_MaxHoursOfPower;
         }
 
-        public ElectricVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, float i_MaxHoursOfPower, float i_InitalHoursOfPower)
+        public ElectricVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tier, float i_MaxHoursOfPower, float i_InitalHoursOfPower)
             : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier)
         {
             r_MaxHoursOfPower = i_MaxHoursOfPower;

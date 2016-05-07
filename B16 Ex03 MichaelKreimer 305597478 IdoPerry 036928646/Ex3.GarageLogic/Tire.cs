@@ -4,11 +4,23 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Tier
+    public class Tire
     {
-        private const int k_MinValueAllowed = 0;
+        private int m_MaxPressure;
+        private const int k_MinPressure = 0;
         private readonly string r_ManufacturerName;
     
+        public int MaxPressure
+        {
+            get
+            {
+                return m_MaxPressure;
+            }
+            set
+            {
+                m_MaxPressure = value;
+            }
+        }
         public string ManufacturerName
         {
             get
@@ -29,13 +41,13 @@ namespace Ex03.GarageLogic
 
         private readonly float r_MaxAllowedAirPressure;
 
-        public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure)
+        public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure)
         {
             r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
         }
 
-        public Tier(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
+        public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
         {
             r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
@@ -53,13 +65,18 @@ namespace Ex03.GarageLogic
             else
             {
                 float maxValueAllowd = r_MaxAllowedAirPressure - m_CurrentAirPressure;
-                throw new ValueOutOfRangeException(k_MinValueAllowed, maxValueAllowd);
+                throw new ValueOutOfRangeException(k_MinPressure, maxValueAllowd);
             }
         }
 
-        public Tier Clone()
+        public Tire Clone()
         {
-            return MemberwiseClone() as Tier;
+            return MemberwiseClone() as Tire;
+        }
+
+        internal float GetPressureLeftToFill()
+        {
+            return MaxPressure - m_CurrentAirPressure;
         }
     }
 }

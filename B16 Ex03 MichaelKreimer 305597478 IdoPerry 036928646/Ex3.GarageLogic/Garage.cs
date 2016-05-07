@@ -6,40 +6,84 @@ namespace Ex03.GarageLogic
 {
     class Garage
     {
-        public enum eVehicleStatus
-        {
-
-        }
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
 
-        public void InsertVehicle(Vehicle io_Vehicle)
+        public void InsertVehicle()
         {
             //1 - TODO
         }
-        public void DisplayVehiclesById()
+        public List<string> DisplayVehiclesById(string i_VehicleId, Vehicle.eStatus i_VehicleStatus)
         {
-            //2 - TODO 
-            // change signature
+            List<string> listOfVehiclesPlates = new List<string>();
+            if (i_VehicleStatus.Equals(Vehicle.eStatus.All))
+            {
+                foreach (Vehicle vehicle in m_Vehicles.Values)
+                {
+                    listOfVehiclesPlates.Add(vehicle.LicensePlate);
+                }
+            }
+            else
+            {
+                foreach(Vehicle vehicle in m_Vehicles.Values)
+                {
+                    if (vehicle.Status.Equals(i_VehicleStatus))
+                    {
+                        listOfVehiclesPlates.Add(vehicle.LicensePlate);
+                    }
+                }
+            }
+            return listOfVehiclesPlates;
         }
-        public void ChangeVehicleStatus(Vehicle io_Vehicle)
+        public void ChangeVehicleStatus(string i_VehiclePlateNumber, Vehicle.eStatus i_NewVehicleStatus)
         {
-            //3 - TODO
-            // change signature
+            // notes : a) maybe change to private
+            //         b) reconsider for throw exception
+            Vehicle vehicleToChange;
+            bool carExists;
+            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToChange);
+            if (carExists)
+            {
+                vehicleToChange.Status = i_NewVehicleStatus;
+            }
         }
-        public void FillTires(string i_VehicleID, )
+        public void FillTires(string i_VehiclePlateNumber)
         {
-            //4 - TODO
-            // change signature
+            Vehicle vehicleToFill;
+            bool carExists;
+            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
+            if (carExists)
+            {
+                foreach (Tire tire in vehicleToFill.Tires)
+                {
+                    tire.AddAirPressure(tire.GetPressureLeftToFill());
+                }
+            }
         }
-        public void FillGasVehicle()
+        public void addGasToVehicle(string i_VehiclePlateNumber, FuelVehicle.eFuelType i_FuelType, float i_FuelToAdd)
         {
-            //5 - TODO
-            // change signature
+            // note: * add range exception
+            Vehicle vehicleToFill;
+            FuelVehicle fuelVehicleToFill;
+            bool carExists;
+            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
+            fuelVehicleToFill = (FuelVehicle)vehicleToFill;
+            if (carExists)
+            {
+                fuelVehicleToFill.Refuel(i_FuelToAdd, i_FuelType);
+            }
         }
-        public void ChargeElectricVehicle()
+        public void ChargeElectricVehicle(string i_VehiclePlateNumber, float i_MinutesForCharging)
         {
-            //6 - TODO
-            // change signature
+            // note: * add range exception
+            Vehicle vehicleToFill;
+            ElectricVehicle electricVehicleToAdd;
+            bool carExists;
+            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
+            electricVehicleToAdd = (ElectricVehicle)vehicleToFill;
+            if (carExists)
+            {
+                electricVehicleToAdd.Charge(i_MinutesForCharging / 60); // TODO: change to const
+            }
         }
         public void DisplayVehicleData()
         {

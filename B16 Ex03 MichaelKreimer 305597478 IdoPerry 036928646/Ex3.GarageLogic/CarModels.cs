@@ -28,15 +28,15 @@ namespace Ex03.GarageLogic
             private eNumberOfDoors m_NumberOfDoors;
             private eColors m_Color;
 
-            public FuelCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, eFuelType i_FuelType, float i_MaxFuelCapacity, eNumberOfDoors i_NumberOfDoors, eColors i_Color) 
-                : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier, i_FuelType, i_MaxFuelCapacity)
+            public FuelCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tire, eFuelType i_FuelType, float i_MaxFuelCapacity, eNumberOfDoors i_NumberOfDoors, eColors i_Color) 
+                : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tire, i_FuelType, i_MaxFuelCapacity)
             {
                 m_NumberOfDoors = i_NumberOfDoors;
                 m_Color = i_Color;
             }
 
-            public FuelCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, eFuelType i_FuelType, float i_MaxFuelCapacity,float i_initialFuel,  eNumberOfDoors i_NumberOfDoors, eColors i_Color)
-    : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier, i_FuelType, i_MaxFuelCapacity , i_initialFuel)
+            public FuelCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tire, eFuelType i_FuelType, float i_MaxFuelCapacity,float i_initialFuel,  eNumberOfDoors i_NumberOfDoors, eColors i_Color)
+    : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tire, i_FuelType, i_MaxFuelCapacity , i_initialFuel)
             {
                 m_NumberOfDoors = i_NumberOfDoors;
                 m_Color = i_Color;
@@ -48,14 +48,14 @@ namespace Ex03.GarageLogic
             private eNumberOfDoors m_NumberOfDoors;
             private eColors m_Color;
 
-            public ElectricCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, float i_MaxHoursOfPower, eNumberOfDoors i_NumberOfDoors, eColors i_Color)
-            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier, i_MaxHoursOfPower)
+            public ElectricCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tire, float i_MaxHoursOfPower, eNumberOfDoors i_NumberOfDoors, eColors i_Color)
+            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tire, i_MaxHoursOfPower)
             {
                 m_NumberOfDoors = i_NumberOfDoors;
                 m_Color = i_Color;
             }
-            public ElectricCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tier i_Tier, float i_MaxHoursOfPower, float i_InitalHoursOfPower, eNumberOfDoors i_NumberOfDoors, eColors i_Color)
-            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier, i_MaxHoursOfPower, i_InitalHoursOfPower)
+            public ElectricCar(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tire, float i_MaxHoursOfPower, float i_InitialHoursOfPower, eNumberOfDoors i_NumberOfDoors, eColors i_Color)
+            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tire, i_MaxHoursOfPower, i_InitialHoursOfPower)
             {
                 m_NumberOfDoors = i_NumberOfDoors;
                 m_Color = i_Color;

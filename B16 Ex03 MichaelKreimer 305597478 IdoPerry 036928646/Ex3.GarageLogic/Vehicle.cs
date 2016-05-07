@@ -7,7 +7,26 @@ namespace Ex03.GarageLogic
     public class Vehicle
     {
         private string m_ModelName;
+        private eStatus m_Status;
 
+        public enum eStatus
+        {
+            InRepair,
+            Repaired,
+            Paid,
+            All,
+        }
+        public eStatus Status
+        {
+            get
+            {
+                return m_Status;
+            }
+            set
+            {
+                m_Status = value;
+            }
+        }
         public string ModelName
         {
             get
@@ -31,7 +50,7 @@ namespace Ex03.GarageLogic
             get;
         }
 
-        private List<Tier> m_Tiers;
+        private List<Tire> m_Tiers;
 
         public int NumberOfTiers
         {
@@ -41,7 +60,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public List<Tier> Tiers 
+        public List<Tire> Tires 
         {
             get
             {
@@ -54,11 +73,11 @@ namespace Ex03.GarageLogic
             return m_LicensePlate.GetHashCode();
         }
 
-        public Vehicle (string i_ModelName , string i_LicensePlate , int i_NumberOfTires, Tier i_Tier)
+        public Vehicle (string i_ModelName , string i_LicensePlate , int i_NumberOfTires, Tire i_Tier)
         {
             m_ModelName = i_ModelName;
             m_LicensePlate = i_LicensePlate;
-            m_Tiers = new List<Tier>(i_NumberOfTires);
+            m_Tiers = new List<Tire>(i_NumberOfTires);
             for (int i = 0; i < i_NumberOfTires; ++i)
             {
                 m_Tiers.Add(i_Tier.Clone()) ;
