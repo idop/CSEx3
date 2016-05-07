@@ -6,6 +6,9 @@ namespace Ex3.GarageLogic
 {
     public class VehicleFactory
     {
-
+        private void test()
+        {
+            
+        }
     }
 }

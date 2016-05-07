@@ -27,6 +27,7 @@ namespace Ex3.GarageLogic
             private eNumberOfDoors m_NumberOfDoors;
             private eColors m_Color;
 
+
         }
 
         public class ElectricCar : ElectricVehicle
@@ -35,5 +36,6 @@ namespace Ex3.GarageLogic
             private eColors m_Color;
 
         }
+
     }
 }
