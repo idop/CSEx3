@@ -8,9 +8,13 @@ namespace Ex03.GarageLogic
     {
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
 
-        public void InsertVehicle()
+        public void InsertVehicle(Vehicle vehicle)
         {
-            //1 - TODO
+            m_Vehicles.Add(vehicle.LicensePlate, vehicle);
+        }
+        public bool IsVehicleAlreadyExists(string i_VehiclePlateNumber)
+        {
+            return m_Vehicles.ContainsKey(i_VehiclePlateNumber);
         }
         public List<string> DisplayVehiclesById(string i_VehicleId, Vehicle.eStatus i_VehicleStatus)
         {
@@ -85,11 +89,17 @@ namespace Ex03.GarageLogic
                 electricVehicleToAdd.Charge(i_MinutesForCharging / 60); // TODO: change to const
             }
         }
-        public void DisplayVehicleData()
+        public string getVehicleData(string i_VehiclePlateNumber)
         {
-            //7 - TODO
-            // change signature
+            Vehicle vehicle;
+            string vehicleData = null;
+            bool carExists;
+            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicle);
+            if (carExists)
+            {
+                vehicleData = vehicle.ToString();
+            }
+            return vehicleData;
         }
-
     }
 }
