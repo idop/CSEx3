@@ -17,33 +17,36 @@ namespace Ex03.ConsoleUi
         private void ControlMainMenu()
         {
             UI.DisplayMainMenu();
-            Menus.MainMenu.eMainMenu choice = (Menus.MainMenu.eMainMenu) UI.GetIntegerFromUser(0,v_NumOfMenuOptions - 1);
-            switch (choice)
+            while (true)
             {
-                case Menus.MainMenu.eMainMenu.EnterNewVehicle:
-                    enterNewVehicle();
-                    break;
-                case Menus.MainMenu.eMainMenu.ShowFindVehicleByLicencePlateSubMenu:
-                    showFindVehicleByLicencePlateSubMenu();
-                    break;
-                case Menus.MainMenu.eMainMenu.ChangeVehicleStatus:
-                    changeVehicleStatus();
-                    break;
-                case Menus.MainMenu.eMainMenu.InflateVehicleTiresToMax:
-                    inflateVehicleTiresToMax();
-                    break;
-                case Menus.MainMenu.eMainMenu.FuelVehicle:
-                    fillFuelToVehicle();
-                    break;
-                case Menus.MainMenu.eMainMenu.ChargeVehicle:
-                    chargeVehicle();
-                    break;
-                case Menus.MainMenu.eMainMenu.PrintFullVehicleDetails:
-                    printFullVehicleDetails();
-                    break;
-                case Menus.MainMenu.eMainMenu.Exit:
-                    System.Environment.Exit(1);
-                    break;
+                Menus.MainMenu.eMainMenu choice = (Menus.MainMenu.eMainMenu)UI.GetIntegerFromUser(0, v_NumOfMenuOptions - 1);
+                switch (choice)
+                {
+                    case Menus.MainMenu.eMainMenu.EnterNewVehicle:
+                        enterNewVehicle();
+                        break;
+                    case Menus.MainMenu.eMainMenu.ShowFindVehicleByLicencePlateSubMenu:
+                        showFindVehicleByLicencePlateSubMenu();
+                        break;
+                    case Menus.MainMenu.eMainMenu.ChangeVehicleStatus:
+                        changeVehicleStatus();
+                        break;
+                    case Menus.MainMenu.eMainMenu.InflateVehicleTiresToMax:
+                        inflateVehicleTiresToMax();
+                        break;
+                    case Menus.MainMenu.eMainMenu.FuelVehicle:
+                        fillFuelToVehicle();
+                        break;
+                    case Menus.MainMenu.eMainMenu.ChargeVehicle:
+                        chargeVehicle();
+                        break;
+                    case Menus.MainMenu.eMainMenu.PrintFullVehicleDetails:
+                        printFullVehicleDetails();
+                        break;
+                    case Menus.MainMenu.eMainMenu.Exit:
+                        System.Environment.Exit(1);
+                        break;
+                }
             }
         }
 
