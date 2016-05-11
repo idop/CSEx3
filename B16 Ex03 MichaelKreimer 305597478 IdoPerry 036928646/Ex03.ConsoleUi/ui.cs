@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUi
 {
-    class Program
+    static class UI
     {
-        public static void Main()
+        public static void PrintMainMenu()
         {
-            Controller controller = new Controller();
+
         }
     }
 }

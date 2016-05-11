@@ -26,9 +26,9 @@ namespace Ex03.ConsoleUi
             internal enum eMainMenu
             {
                 All,
-                InRepier,
-                Repeired,
-                PayedFor,
+                InRepair,
+                Repaired,
+                PaidFor,
                 ReturnToMainMenu
             }
         }
