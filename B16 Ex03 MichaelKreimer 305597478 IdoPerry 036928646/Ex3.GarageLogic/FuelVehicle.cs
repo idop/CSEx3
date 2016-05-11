@@ -36,6 +36,17 @@ namespace Ex03.GarageLogic
             m_CurrentFuelAmount = 0;
             Refuel(i_InitalFuelAmount, i_FuelType);
         }
+        public float CurrentFuelAmount
+        {
+            get
+            {
+                return m_CurrentFuelAmount;
+            }
+            set
+            {
+                m_CurrentFuelAmount = value;
+            }
+        }
 
         public override float EnergyMeterPercentage
         {
@@ -65,6 +76,10 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException(string.Format(k_InvalidArgumentMessage, i_FuelType , r_FuelType));
             }
 
+        }
+        public float calcFuelLeftToMax()
+        {
+            return r_MaxFuelTankCapacity - m_CurrentFuelAmount;
         }
     }
 }

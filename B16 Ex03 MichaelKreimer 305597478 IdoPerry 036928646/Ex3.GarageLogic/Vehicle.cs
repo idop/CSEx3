@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Vehicle
+    public abstract class Vehicle
     {
         private string m_ModelName;
         private eStatus m_Status;

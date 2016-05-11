@@ -74,7 +74,7 @@ namespace Ex03.GarageLogic
             return MemberwiseClone() as Tire;
         }
 
-        internal float GetPressureLeftToFill()
+        internal float calcAirPressureLeftToFill()
         {
             return MaxPressure - m_CurrentAirPressure;
         }

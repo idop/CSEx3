@@ -7,10 +7,16 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
+        private Dictionary<string, Costumer> m_Costumers = new Dictionary<string, Costumer>();
 
-        public void InsertVehicle(Vehicle vehicle)
+        public void InsertVehicle(Vehicle i_Vehicle)
         {
-            m_Vehicles.Add(vehicle.LicensePlate, vehicle);
+            m_Vehicles.Add(i_Vehicle.LicensePlate, i_Vehicle);
+        }
+        public void InsertVehicle(Vehicle i_Vehicle,Costumer i_Costumer)
+        {
+            m_Vehicles.Add(i_Vehicle.LicensePlate, i_Vehicle);
+            m_Costumers.Add(i_Vehicle.LicensePlate, i_Costumer);
         }
         public bool IsVehicleAlreadyExists(string i_VehiclePlateNumber)
         {
@@ -50,7 +56,7 @@ namespace Ex03.GarageLogic
                 vehicleToChange.Status = i_NewVehicleStatus;
             }
         }
-        public void FillTires(string i_VehiclePlateNumber)
+        public void InflateVehicleTiresToMax(string i_VehiclePlateNumber)
         {
             Vehicle vehicleToFill;
             bool carExists;
@@ -59,7 +65,7 @@ namespace Ex03.GarageLogic
             {
                 foreach (Tire tire in vehicleToFill.Tires)
                 {
-                    tire.AddAirPressure(tire.GetPressureLeftToFill());
+                    tire.AddAirPressure(tire.calcAirPressureLeftToFill());
                 }
             }
         }
@@ -100,6 +106,16 @@ namespace Ex03.GarageLogic
                 vehicleData = vehicle.ToString();
             }
             return vehicleData;
+        }
+        public float calcFuelLeftToFill(string i_PlateNumber)
+        {
+            Vehicle vehicle;
+            FuelVehicle fuelVehicle;
+            m_Vehicles.TryGetValue(i_PlateNumber, out vehicle);
+            fuelVehicle = vehicle as FuelVehicle;
+            float fuelLeft = fuelVehicle.calcFuelLeftToMax();
+
+            return fuelLeft;
         }
     }
 }

@@ -6,9 +6,30 @@ namespace Ex03.ConsoleUi
 {
     static class UI
     {
-        public static void PrintMainMenu()
+        public static void DisplayMainMenu()
         {
 
+        }
+
+        internal static int GetIntegerFromUser(int i_MinRange, int i_MaxRange)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        internal static void PrintMessage(string msg)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static string GetStringFromUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static float GetFloatFromUser(int v1, float v2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

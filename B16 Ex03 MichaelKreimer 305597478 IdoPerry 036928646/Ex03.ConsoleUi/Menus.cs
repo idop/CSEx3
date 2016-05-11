@@ -8,11 +8,11 @@ namespace Ex03.ConsoleUi
     {
         internal class MainMenu
         {
-            internal enum eMainMenu
+            public enum eMainMenu
             {
                 EnterNewVehicle,
                 ShowFindVehicleByLicencePlateSubMenu,
-                ChnageVehicleStatus,
+                ChangeVehicleStatus,
                 InflateVehicleTiresToMax,
                 FuelVehicle,
                 ChargeVehicle,
