@@ -8,11 +8,12 @@ namespace Ex03.ConsoleUi
     {
         public static void DisplayMainMenu()
         {
-
+            Console.WriteLine(Menus.MainMenu.GetMainMenuUiDisplay());
         }
 
         internal static int GetIntegerFromUser(int i_MinRange, int i_MaxRange)
         {
+
             throw new NotImplementedException();
         }
 

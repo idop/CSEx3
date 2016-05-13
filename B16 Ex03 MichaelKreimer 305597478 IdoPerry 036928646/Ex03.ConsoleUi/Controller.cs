@@ -46,6 +46,8 @@ namespace Ex03.ConsoleUi
                     case Menus.MainMenu.eMainMenu.Exit:
                         System.Environment.Exit(1);
                         break;
+                    default:
+                        break;
                 }
             }
         }
