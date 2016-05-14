@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
                 throw new ValueOutOfRangeException(i_MinValue, i_maxValue);
             }
 
-            return (T)Enum.ToObject(typeof(T), i_Input);
+            return (T)Enum.ToObject(typeof(T), intInput);
         }
 
         public static bool IntegerInRange(int i_Input, int i_MinValue, int i_maxValue)

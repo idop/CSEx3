@@ -117,5 +117,30 @@ namespace Ex03.GarageLogic
             }
             return vehicleData;
         }
+
+        public  int GetNumberOfInputParametersForSpecificVehicle(VehicleCatalog.eVehicleCatalog i_Option)
+        {
+            return m_Factory.GetNumberOfInputParametersForSpecificVehicle(i_Option);
+        }
+
+        public string GetInputDisplayMessageForParameter(VehicleCatalog.eVehicleCatalog i_Option, int i)
+        {
+            return m_Factory.GetInputDisplayMessageForParameter(i_Option, i);
+        }
+
+        public void StartNewVehicleInputSequence(string i_LicensePlate)
+        {
+            m_Factory.StartNewVehicleInputSequence(i_LicensePlate);
+        }
+
+        public void TakeInputForParameter(VehicleCatalog.eVehicleCatalog i_Option, int i, string i_input)
+        {
+            m_Factory.TakeInputForParameter(i_Option, i, i_input);
+        }
+
+        public Vehicle GetNewVehicle(VehicleCatalog.eVehicleCatalog i_Option)
+        {
+            return m_Factory.GetNewVehicle(i_Option);
+        }
     }
 }

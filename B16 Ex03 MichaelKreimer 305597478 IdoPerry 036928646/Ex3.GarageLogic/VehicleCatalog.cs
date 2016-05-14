@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
             ElectricMotorCycle,
             FuelCar,
             ElectricCar,
-            Truck
+            FuelTruck
         }
 
         public static string GetVehicleCatalogUiDisplay()
@@ -24,12 +24,12 @@ namespace Ex03.GarageLogic
 {1} - Electric Bike
 {2} - Regular Car
 {3} - Electric Car 
-{4} - Truck",
+{4} - Fuel Truck",
 (int)eVehicleCatalog.FuelMotorCycle,
 (int)eVehicleCatalog.ElectricMotorCycle,
 (int)eVehicleCatalog.FuelCar,
 (int)eVehicleCatalog.ElectricCar,
-(int)eVehicleCatalog.Truck);
+(int)eVehicleCatalog.FuelTruck);
 
             return vehicleCatalogUiDisplay;
         }
