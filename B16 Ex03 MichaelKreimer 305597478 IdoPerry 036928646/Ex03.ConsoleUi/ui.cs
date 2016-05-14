@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Ex03.ConsoleUi
 {
-    static class UI
+    internal static class UI
     {
-        public static void DisplayMainMenu()
+        internal static void DisplayMainMenu()
         {
             Console.WriteLine(Menus.MainMenu.GetMainMenuUiDisplay());
         }
@@ -17,6 +17,17 @@ namespace Ex03.ConsoleUi
             throw new NotImplementedException();
         }
 
+        internal static void ClearConsle()
+        {
+            try
+            {
+                Console.Clear();
+            }
+            catch (System.IO.IOException ex)
+            {
+                Console.WriteLine("Clearing Console failed, please contact you system administrator");
+            }
+        }
 
         internal static void PrintMessage(string msg)
         {

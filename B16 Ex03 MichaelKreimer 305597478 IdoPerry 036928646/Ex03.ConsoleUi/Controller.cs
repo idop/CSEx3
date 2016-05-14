@@ -1,14 +1,15 @@
 ﻿using Ex03.GarageLogic;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
+using Ex03.ConsoleUi.Menus;
 namespace Ex03.ConsoleUi
 {
     class Controller
     {// here is the logic manager of the garage
         private const int v_NumOfMenuOptions = 8;
         private Garage m_Garage = new Garage();
+        private bool m_UserWantsToUseProgram = true;
+        private const string k_InvalidMsg = "Invalid Input {0} Please try again";
+       
         public Controller()
         {
             ControlMainMenu();
@@ -16,40 +17,64 @@ namespace Ex03.ConsoleUi
 
         private void ControlMainMenu()
         {
+            UI.ClearConsle();
             UI.DisplayMainMenu();
-            while (true)
+            MainMenu.eMainMenu option;
+            while (m_UserWantsToUseProgram)
             {
-                Menus.MainMenu.eMainMenu choice = (Menus.MainMenu.eMainMenu)UI.GetIntegerFromUser(0, v_NumOfMenuOptions - 1);
-                switch (choice)
+                try
                 {
-                    case Menus.MainMenu.eMainMenu.EnterNewVehicle:
-                        enterNewVehicle();
-                        break;
-                    case Menus.MainMenu.eMainMenu.ShowFindVehicleByLicencePlateSubMenu:
-                        showFindVehicleByLicencePlateSubMenu();
-                        break;
-                    case Menus.MainMenu.eMainMenu.ChangeVehicleStatus:
-                        changeVehicleStatus();
-                        break;
-                    case Menus.MainMenu.eMainMenu.InflateVehicleTiresToMax:
-                        inflateVehicleTiresToMax();
-                        break;
-                    case Menus.MainMenu.eMainMenu.FuelVehicle:
-                        fillFuelToVehicle();
-                        break;
-                    case Menus.MainMenu.eMainMenu.ChargeVehicle:
-                        chargeVehicle();
-                        break;
-                    case Menus.MainMenu.eMainMenu.PrintFullVehicleDetails:
-                        printFullVehicleDetails();
-                        break;
-                    case Menus.MainMenu.eMainMenu.Exit:
-                        System.Environment.Exit(1);
-                        break;
-                    default:
-                        break;
+                    option = getMainMenuOption();
+                    doMainMainOption(option);
                 }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine(k_InvalidMsg, ex.Message);
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine(k_InvalidMsg, ex.Message);
+                }
+           
             }
+        }
+
+        private void doMainMainOption(MainMenu.eMainMenu i_Option)
+        {
+            switch (i_Option)
+            {
+                case MainMenu.eMainMenu.EnterNewVehicle:
+                    enterNewVehicle();
+                    break;
+                case MainMenu.eMainMenu.ShowFindVehicleByLicencePlateSubMenu:
+                    showFindVehicleByLicencePlateSubMenu();
+                    break;
+                case MainMenu.eMainMenu.ChangeVehicleStatus:
+                    changeVehicleStatus();
+                    break;
+                case MainMenu.eMainMenu.InflateVehicleTiresToMax:
+                    inflateVehicleTiresToMax();
+                    break;
+                case MainMenu.eMainMenu.FuelVehicle:
+                    fillFuelToVehicle();
+                    break;
+                case MainMenu.eMainMenu.ChargeVehicle:
+                    chargeVehicle();
+                    break;
+                case MainMenu.eMainMenu.PrintFullVehicleDetails:
+                    printFullVehicleDetails();
+                    break;
+                case MainMenu.eMainMenu.Exit:
+                    m_UserWantsToUseProgram = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private MainMenu.eMainMenu getMainMenuOption()
+        {
+            return EnumInputHandler<MainMenu.eMainMenu>(MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue);
         }
 
         private void printFullVehicleDetails()
@@ -94,7 +119,7 @@ namespace Ex03.ConsoleUi
 
         private Vehicle getVehicleInput()
         {
-            string msg = String.Format(
+            string msg = string.Format(
 @"What kind of vehicle do you own?
 0 - Regular Bike
 1 - Electric Bike
@@ -142,6 +167,21 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(msg);
             return UI.GetStringFromUser();
         }
-    }
 
+        public static T EnumInputHandler<T>(int i_MinValue, int i_maxValue)
+        {
+            int input = int.Parse(Console.ReadLine());
+            if (!IntegerInRange(input, i_MinValue, i_maxValue))
+            {
+                throw new ValueOutOfRangeException(i_MinValue, i_maxValue);
+            }
+
+            return (T)Enum.ToObject(typeof(T), input);
+        }
+
+        public static bool IntegerInRange(int input, int i_MinValue, int i_maxValue)
+        {
+            return (input >= i_MinValue && input <= i_maxValue);
+        }
+    }
 }

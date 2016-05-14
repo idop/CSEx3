@@ -5,6 +5,8 @@ namespace Ex03.ConsoleUi.Menus
 
     public class MainMenu
     {
+        public const int k_MinEnumValue = 0;
+        public const int k_MaxEnumValue = 7;
         public enum eMainMenu
         {
             EnterNewVehicle,
@@ -20,14 +22,15 @@ namespace Ex03.ConsoleUi.Menus
         public static string GetMainMenuUiDisplay()
         {
             string menuDisplayString = string.Format(
-@"Press {0} to enter a new Vehicle
-Press {1} to find all vehicle by status
-Press {2} to change vehicle status
-Press {3} to inflate vehicle tiers to maximun allowed
-Press {4} to add Fuel to fuel based vehicle
-Press {5} to charge electric vehicle
-Press {6} to Print vehicle details
-Press {7} to exit",
+@"Welcome to the garage managment program. please select your action:
+{0} - to enter a new Vehicle
+{1} - to find all vehicle by status
+{2} - to change vehicle status
+{3} - to inflate vehicle tiers to maximun allowed
+{4} - to add Fuel to fuel based vehicle
+{5} - to charge electric vehicle
+{6} - to Print vehicle details
+{7} - to exit",
 (int) eMainMenu.EnterNewVehicle,
 (int)eMainMenu.ShowFindVehicleByLicencePlateSubMenu,
 (int) eMainMenu.ChangeVehicleStatus,

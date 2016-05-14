@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class ValueOutOfRangeException : Exception
+    public class ValueOutOfRangeException : Exception
     {
         private const string k_Message = "Only values between {0} - {1} are allowed.";
         public float m_MinValue;
