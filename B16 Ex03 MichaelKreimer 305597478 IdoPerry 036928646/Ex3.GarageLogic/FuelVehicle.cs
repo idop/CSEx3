@@ -9,27 +9,20 @@ namespace Ex03.GarageLogic
     {
         private const int k_MinValueAllowed = 0;
         private const string k_InvalidArgumentMessage = "Entered fuel type of {0} does not match allowed fuel type of {1}.";
-        public enum eFuelType
-        {
-            Octan96,
-            Octan95,
-            Octan98,
-            Soler
-        }
 
-        private readonly eFuelType r_FuelType;
+        private readonly FuelTypes.eFuelType r_FuelType;
         private float m_CurrentFuelAmount = 0;
         private readonly float r_MaxFuelTankCapacity;
 
-        public FuelVehicle(string i_ModelName, string i_LicensePlate, int i_NumberOfTires, Tire i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity)
-            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier) 
+        public FuelVehicle(string i_ModelName, string i_LicensePlate, List<Tire> i_Tiers, FuelTypes.eFuelType i_FuelType, float i_MaxFuelTankCapacity)
+            : base(i_ModelName, i_LicensePlate, i_Tiers) 
         {
             r_FuelType = i_FuelType;
             r_MaxFuelTankCapacity = i_MaxFuelTankCapacity;
         }
 
-        public FuelVehicle(string i_ModelName, string i_LicensePlate ,int i_NumberOfTires, Tire i_Tier, eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
-            : base(i_ModelName, i_LicensePlate, i_NumberOfTires, i_Tier)
+        public FuelVehicle(string i_ModelName, string i_LicensePlate, List<Tire> i_Tiers, FuelTypes.eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
+            : base(i_ModelName, i_LicensePlate, i_Tiers)
         {
             r_FuelType = i_FuelType;
             r_MaxFuelTankCapacity = i_MaxFuelTankCapacity;
@@ -56,7 +49,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Refuel(float i_FuelToAdd , eFuelType i_FuelType)
+        public void Refuel(float i_FuelToAdd , FuelTypes.eFuelType i_FuelType)
         {
             if (i_FuelType == r_FuelType)
             {

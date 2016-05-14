@@ -2,12 +2,41 @@
 {
     public class Costumer
     {
-        string m_Name;
-        string m_PhoneNumber;
-        public Costumer(string name, string phoneNumber)
+        private string m_Name;
+        private string m_PhoneNumber;
+        private Vehicle m_CostumerVehicle;
+        private eVehicleStatus m_Status;
+
+        public enum eVehicleStatus
         {
-            m_Name = name;
-            m_PhoneNumber = phoneNumber;
+            InRepair,
+            Repaired,
+            Paid,
+            All
+        }
+        public eVehicleStatus Status
+        {
+            get
+            {
+                return m_Status;
+            }
+            set
+            {
+                m_Status = value;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return m_CostumerVehicle.GetHashCode();
+        }
+
+        public Costumer(string i_Name, string i_PhoneNumber, eVehicleStatus i_Stauts, Vehicle i_Vehicle)
+        {
+            m_Name = i_Name;
+            m_PhoneNumber = i_PhoneNumber;
+            m_Status = i_Stauts;
+            m_CostumerVehicle = i_Vehicle;
         }
         public string Name
         {
@@ -31,6 +60,18 @@
                 m_PhoneNumber = value;
             }
         }
-    }
 
+        public Vehicle CostumerVehicle
+        {
+            get
+            {
+                return m_CostumerVehicle;
+            }
+
+            set
+            {
+                m_CostumerVehicle = value;
+            }
+        }
+    }
 }

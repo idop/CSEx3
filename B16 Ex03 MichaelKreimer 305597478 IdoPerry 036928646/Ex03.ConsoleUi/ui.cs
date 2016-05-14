@@ -19,14 +19,7 @@ namespace Ex03.ConsoleUi
 
         internal static void ClearConsle()
         {
-            try
-            {
-                Console.Clear();
-            }
-            catch (System.IO.IOException ex)
-            {
-                Console.WriteLine("Clearing Console failed, please contact you system administrator");
-            }
+            Console.Clear();
         }
 
         internal static void PrintMessage(string msg)
@@ -34,10 +27,11 @@ namespace Ex03.ConsoleUi
             Console.WriteLine(msg);
         }
 
-        internal static string GetStringFromUser()
+        internal static string GetInput()
         {
-            throw new NotImplementedException();
+            return Console.ReadLine();
         }
+
 
         internal static float GetFloatFromUser(int v1, float v2)
         {

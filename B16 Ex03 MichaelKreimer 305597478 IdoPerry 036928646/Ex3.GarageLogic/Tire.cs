@@ -6,20 +6,17 @@ namespace Ex03.GarageLogic
 {
     public class Tire
     {
-        private int m_MaxPressure;
         private const int k_MinPressure = 0;
         private readonly string r_ManufacturerName;
-    
+        private readonly int r_MaxPressure;
+
         public int MaxPressure
         {
             get
             {
-                return m_MaxPressure;
+                return r_MaxPressure;
             }
-            set
-            {
-                m_MaxPressure = value;
-            }
+
         }
         public string ManufacturerName
         {
@@ -78,5 +75,6 @@ namespace Ex03.GarageLogic
         {
             return MaxPressure - m_CurrentAirPressure;
         }
+
     }
 }

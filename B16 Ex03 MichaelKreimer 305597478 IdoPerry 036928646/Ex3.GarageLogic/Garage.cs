@@ -6,117 +6,116 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, Costumer> m_Costumers = new Dictionary<string, Costumer>();
         private VehicleFactory m_Factory = new VehicleFactory();
-        public void InsertVehicle(Vehicle i_Vehicle)
+        public void InsertCostumer(Costumer i_Costumer)
         {
-            m_Vehicles.Add(i_Vehicle.LicensePlate, i_Vehicle);
-        }
-        public void InsertVehicle(Vehicle i_Vehicle,Costumer i_Costumer)
-        {
-            m_Vehicles.Add(i_Vehicle.LicensePlate, i_Vehicle);
-            m_Costumers.Add(i_Vehicle.LicensePlate, i_Costumer);
+            m_Costumers.Add(i_Costumer.CostumerVehicle.LicensePlate, i_Costumer);
         }
         public bool IsVehicleAlreadyExists(string i_VehiclePlateNumber)
         {
-            return m_Vehicles.ContainsKey(i_VehiclePlateNumber);
+            return m_Costumers.ContainsKey(i_VehiclePlateNumber);
         }
-        public List<string> DisplayVehiclesById(string i_VehicleId, Vehicle.eStatus i_VehicleStatus)
+        public List<string> DisplayVehiclesById(string i_VehicleId, Costumer.eVehicleStatus i_VehicleStatus)
         {
             List<string> listOfVehiclesPlates = new List<string>();
-            if (i_VehicleStatus.Equals(Vehicle.eStatus.All))
+            foreach (Costumer costumer in m_Costumers.Values)
             {
-                foreach (Vehicle vehicle in m_Vehicles.Values)
+
+                if (i_VehicleStatus.Equals(Costumer.eVehicleStatus.All) || costumer.Status.Equals(i_VehicleStatus))
                 {
-                    listOfVehiclesPlates.Add(vehicle.LicensePlate);
+                    listOfVehiclesPlates.Add(costumer.CostumerVehicle.LicensePlate);
                 }
+                
             }
-            else
-            {
-                foreach(Vehicle vehicle in m_Vehicles.Values)
-                {
-                    if (vehicle.Status.Equals(i_VehicleStatus))
-                    {
-                        listOfVehiclesPlates.Add(vehicle.LicensePlate);
-                    }
-                }
-            }
+     
             return listOfVehiclesPlates;
         }
-        public void ChangeVehicleStatus(string i_VehiclePlateNumber, Vehicle.eStatus i_NewVehicleStatus)
+        public void ChangeVehicleStatus(string i_VehiclePlateNumber, Costumer.eVehicleStatus i_NewVehicleStatus)
         {
             // notes : a) maybe change to private
             //         b) reconsider for throw exception
-            Vehicle vehicleToChange;
+            Costumer costumerToChange;
             bool carExists;
-            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToChange);
+            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumerToChange);
             if (carExists)
             {
-                vehicleToChange.Status = i_NewVehicleStatus;
+                costumerToChange.Status = i_NewVehicleStatus;
             }
         }
         public void InflateVehicleTiresToMax(string i_VehiclePlateNumber)
         {
-            Vehicle vehicleToFill;
+            Costumer costumer;
             bool carExists;
-            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
+            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                foreach (Tire tire in vehicleToFill.Tires)
+                foreach (Tire tire in costumer.CostumerVehicle.Tires)
                 {
                     tire.AddAirPressure(tire.calcAirPressureLeftToFill());
                 }
             }
         }
-        public void addGasToVehicle(string i_VehiclePlateNumber, FuelVehicle.eFuelType i_FuelType, float i_FuelToAdd)
+        public void addGasToVehicle(string i_VehiclePlateNumber, FuelTypes.eFuelType i_FuelType, float i_FuelToAdd)
         {
             // note: * add range exception
-            Vehicle vehicleToFill;
-            FuelVehicle fuelVehicleToFill;
+            Costumer costumer;
             bool carExists;
-            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
-            fuelVehicleToFill = (FuelVehicle)vehicleToFill;
+            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                fuelVehicleToFill.Refuel(i_FuelToAdd, i_FuelType);
+                if (costumer.CostumerVehicle is FuelVehicle)
+                {
+                    ((FuelVehicle)costumer.CostumerVehicle).Refuel(i_FuelToAdd, i_FuelType);
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format("Vehicle with license Plate {0} does not run on fuel", i_VehiclePlateNumber));
+                }
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
         }
         public void ChargeElectricVehicle(string i_VehiclePlateNumber, float i_MinutesForCharging)
         {
             // note: * add range exception
-            Vehicle vehicleToFill;
-            ElectricVehicle electricVehicleToAdd;
+            Costumer costumer;
             bool carExists;
-            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicleToFill);
-            electricVehicleToAdd = (ElectricVehicle)vehicleToFill;
+            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                electricVehicleToAdd.Charge(i_MinutesForCharging / 60); // TODO: change to const
+                if (costumer.CostumerVehicle is ElectricVehicle)
+                {
+                    ((ElectricVehicle)costumer.CostumerVehicle).Charge(i_MinutesForCharging);
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format("Vehicle with license Plate {0} does not run on Electricity", i_VehiclePlateNumber));
+                }
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
         }
+    
         public string getVehicleData(string i_VehiclePlateNumber)
         {
-            Vehicle vehicle;
+            Costumer costumer;
             string vehicleData = null;
             bool carExists;
-            carExists = m_Vehicles.TryGetValue(i_VehiclePlateNumber, out vehicle);
+            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                vehicleData = vehicle.ToString();
+                vehicleData = costumer.CostumerVehicle.ToString();
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
             return vehicleData;
         }
-        public float calcFuelLeftToFill(string i_PlateNumber)
-        {
-            Vehicle vehicle;
-            FuelVehicle fuelVehicle;
-            m_Vehicles.TryGetValue(i_PlateNumber, out vehicle);
-            fuelVehicle = vehicle as FuelVehicle;
-            float fuelLeft = fuelVehicle.calcFuelLeftToMax();
-
-            return fuelLeft;
-        }
-
     }
 }

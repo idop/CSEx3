@@ -7,26 +7,8 @@ namespace Ex03.GarageLogic
     public abstract class Vehicle
     {
         private string m_ModelName;
-        private eStatus m_Status;
+        private string m_LicensePlate;
 
-        public enum eStatus
-        {
-            InRepair,
-            Repaired,
-            Paid,
-            All,
-        }
-        public eStatus Status
-        {
-            get
-            {
-                return m_Status;
-            }
-            set
-            {
-                m_Status = value;
-            }
-        }
         public string ModelName
         {
             get
@@ -34,8 +16,6 @@ namespace Ex03.GarageLogic
                 return m_ModelName;
             }
         }
-
-        private string m_LicensePlate;
 
         public string LicensePlate
         {
@@ -73,16 +53,11 @@ namespace Ex03.GarageLogic
             return m_LicensePlate.GetHashCode();
         }
 
-        public Vehicle (string i_ModelName , string i_LicensePlate , int i_NumberOfTires, Tire i_Tier)
+        public Vehicle (string i_ModelName , string i_LicensePlate, List<Tire> i_Tiers)
         {
             m_ModelName = i_ModelName;
             m_LicensePlate = i_LicensePlate;
-            m_Tiers = new List<Tire>(i_NumberOfTires);
-            for (int i = 0; i < i_NumberOfTires; ++i)
-            {
-                m_Tiers.Add(i_Tier.Clone()) ;
-            }
-
+            m_Tiers = i_Tiers;
         }
         public override bool Equals(object obj)
         {
@@ -115,9 +90,11 @@ namespace Ex03.GarageLogic
 
             return equals;
         }
+
         public static bool operator !=(Vehicle a, Vehicle b)
         {
             return !(a == b);
         }
+
     }
 }

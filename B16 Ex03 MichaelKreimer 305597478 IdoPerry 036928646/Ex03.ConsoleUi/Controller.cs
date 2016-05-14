@@ -25,7 +25,7 @@ namespace Ex03.ConsoleUi
             {
                 try
                 {
-                    input = Console.ReadLine();
+                    input = UI.GetInput();
                     option = MainMenu.GetOption(input);
                     doMainMainOption(option);
                 }
@@ -78,42 +78,41 @@ namespace Ex03.ConsoleUi
 
         private void printFullVehicleDetails()
         {
-            m_Garage.getVehicleData(getPlateNumberFromUser());
+            m_Garage.getVehicleData(getLicensePlateNumberFromUser());
         }
 
         private void chargeVehicle()
         {
-            string plateNumber = getPlateNumberFromUser();
+            string plateNumber = getLicensePlateNumberFromUser();
             float minutesToCharage = UI.GetFloatFromUser(0, float.MaxValue - 1);
             m_Garage.ChargeElectricVehicle(plateNumber, minutesToCharage);
         }
 
         private void enterNewVehicle()
         {
-            string msg = "please enter car license plate number";
-            UI.PrintMessage(msg);
-            Vehicle vehicle = getVehicleInput();
-            if (m_Garage.IsVehicleAlreadyExists(vehicle.LicensePlate))
+            string licensePlate = getLicensePlateNumberFromUser();
+            if (m_Garage.IsVehicleAlreadyExists(licensePlate))
             {
-                m_Garage.InsertVehicle(vehicle);
+                m_Garage.ChangeVehicleStatus(licensePlate , Costumer.eVehicleStatus.InRepair);
             }
             else
             {
                 Costumer costumer = getCostumerInput();
-                m_Garage.InsertVehicle(vehicle, costumer);
+                m_Garage.InsertCostumer(costumer);
             }
             
         }
 
-        private Costumer getCostumerInput()
+        private Costumer getCostumerInput() // TODO GET VEHICLE INP
         {
             string msg = "Insert name: ";
             UI.PrintMessage(msg);
-            string name = UI.GetStringFromUser();
+            string name = UI.GetInput();
             msg = "insert phone number: ";
             UI.PrintMessage(msg);
-            string phoneNumber = UI.GetStringFromUser();
-            return new Costumer(name, phoneNumber);
+            string phoneNumber = UI.GetInput();
+            Vehicle vehicle = getVehicleInput();
+            return new Costumer(name, phoneNumber, Costumer.eVehicleStatus.InRepair , vehicle);
         }
 
         private Vehicle getVehicleInput()
@@ -122,7 +121,7 @@ namespace Ex03.ConsoleUi
 
             UI.PrintMessage(msg);
             UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
-            string input = Console.ReadLine();
+            string input = UI.GetInput();
             VehicleCatalog.eVehicleCatalog option = VehicleCatalog.GetOption(input);
             throw new NotImplementedException();
         }
@@ -134,7 +133,7 @@ namespace Ex03.ConsoleUi
 
         private void changeVehicleStatus()
         {
-            string plateNumber = getPlateNumberFromUser();
+            string plateNumber = getLicensePlateNumberFromUser();
             string msg = String.Format(
 @"What is the new status of the car?
 0 - In repair
@@ -142,25 +141,28 @@ namespace Ex03.ConsoleUi
 2 - Paid
 ");
             UI.PrintMessage(msg);
-            Vehicle.eStatus vehicleStatus = (Vehicle.eStatus)UI.GetIntegerFromUser(0, 2);
+            Costumer.eVehicleStatus vehicleStatus = (Costumer.eVehicleStatus)UI.GetIntegerFromUser(0, 2);
             m_Garage.ChangeVehicleStatus(plateNumber, vehicleStatus);
         }
         private void inflateVehicleTiresToMax()
         {
-            m_Garage.InflateVehicleTiresToMax(getPlateNumberFromUser());
+            m_Garage.InflateVehicleTiresToMax(getLicensePlateNumberFromUser());
         }
-        private void fillFuelToVehicle()
+        private void fillFuelToVehicle() // hnadle Exceptions
         {
-            string plateNumber = getPlateNumberFromUser();
-            FuelVehicle.eFuelType fuelType = (FuelVehicle.eFuelType)UI.GetIntegerFromUser(0, 3); // TODO: change to 0 - v_MaxFuelTypes-1
-            float fuelToFill = UI.GetFloatFromUser(0, m_Garage.calcFuelLeftToFill(plateNumber) - 1);
+            string plateNumber = getLicensePlateNumberFromUser();
+            UI.PrintMessage("Please Select the fuel Type");
+            UI.PrintMessage(FuelTypes.GetFuelTypesUiDisplay());
+            string input = UI.GetInput();
+            FuelTypes.eFuelType fuelType = FuelTypes.GetOption(input);
+            float fuelToFill = float.Parse(UI.GetInput());
             m_Garage.addGasToVehicle(plateNumber, fuelType, fuelToFill);
         }
-        private string getPlateNumberFromUser()
+        private string getLicensePlateNumberFromUser()
         {
             string msg = "Please enter the license plate number: ";
             UI.PrintMessage(msg);
-            return UI.GetStringFromUser();
+            return UI.GetInput();
         }
 
 
