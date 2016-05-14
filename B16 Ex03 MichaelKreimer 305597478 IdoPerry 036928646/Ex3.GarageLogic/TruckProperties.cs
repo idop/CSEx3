@@ -3,8 +3,9 @@ namespace Ex03.GarageLogic.TruckModels
 {
     public sealed class TruckProperties
     {
-        bool m_IsCarryingDangerousMaterials;
-        float m_MaxCarryLoad;
+        public const int k_NumberOfTires = 16;
+        private bool m_IsCarryingDangerousMaterials;
+        private float m_MaxCarryLoad;
 
         public TruckProperties(bool i_IsCarryingDangerousMaterials, float i_MaxCarryLoad)
         {

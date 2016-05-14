@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
 {
     public class VehicleCatalog
     {
-        private const int k_MinEnumValue = 0;
-        private const int k_MaxEnumValue = 4;
+        public const int k_MinEnumValue = 0;
+        public const int k_MaxEnumValue = 4;
         public enum eVehicleCatalog
         {
             FuelMotorCycle,
@@ -32,11 +32,6 @@ namespace Ex03.GarageLogic
 (int)eVehicleCatalog.Truck);
 
             return vehicleCatalogUiDisplay;
-        }
-
-        public static eVehicleCatalog GetOption(string i_Input)
-        {
-            return GarageUtils.GetEnumOption<eVehicleCatalog>(i_Input, k_MinEnumValue, k_MaxEnumValue);
         }
     }
 }

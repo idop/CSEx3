@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic.MotorCycleModels
 {
     public sealed class MotorCycleProperties
     {
+        public const int k_NumberOfTires = 2;
         public enum eLicenseType
         {
             A,

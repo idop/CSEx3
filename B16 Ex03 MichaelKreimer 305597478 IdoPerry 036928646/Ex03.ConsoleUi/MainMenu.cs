@@ -5,8 +5,8 @@ namespace Ex03.ConsoleUi.Menus
 
     public class MainMenu
     {
-        private const int k_MinEnumValue = 0;
-        private const int k_MaxEnumValue = 7;
+        public const int k_MinEnumValue = 0;
+        public const int k_MaxEnumValue = 7;
         public enum eMainMenu
         {
             EnterNewVehicle,
@@ -42,11 +42,5 @@ namespace Ex03.ConsoleUi.Menus
 
             return menuDisplayString.ToString();
         }
-
-        public static eMainMenu GetOption(string i_Input)
-        {
-            return GarageUtils.GetEnumOption<eMainMenu>(i_Input, k_MinEnumValue,k_MaxEnumValue);
-        }
-
     }
 }

@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic.CarModels
 {
     public sealed class CarProperties
     {
+        public const int k_NumberOfTires = 4;
         public enum eColors
         {
             Yellow,

@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
 {
     public static class FuelTypes
     {
-        private const int k_MinEnumValue = 0;
-        private const int k_MaxEnumValue = 3;
+        public const int k_MinEnumValue = 0;
+        public const int k_MaxEnumValue = 3;
         public enum eFuelType
         {
             Octan95,
@@ -28,11 +28,6 @@ namespace Ex03.GarageLogic
 (int)eFuelType.Soler);
 
             return fuelTypesUiDisplay;
-        }
-
-        public static eFuelType GetOption(string i_Input)
-        {
-            return GarageUtils.GetEnumOption<eFuelType>(i_Input, k_MinEnumValue, k_MaxEnumValue);
         }
     }
 }

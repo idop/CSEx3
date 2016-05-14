@@ -6,14 +6,18 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_ModelName;
         private string m_LicensePlate;
+        private string m_ModelName;
 
         public string ModelName
         {
             get
             {
                 return m_ModelName;
+            }
+            set
+            {
+                m_ModelName = value;
             }
         }
 
@@ -22,6 +26,10 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_LicensePlate;
+            }
+            set
+            {
+                m_LicensePlate = value;
             }
         }
 
@@ -53,10 +61,15 @@ namespace Ex03.GarageLogic
             return m_LicensePlate.GetHashCode();
         }
 
-        public Vehicle (string i_ModelName , string i_LicensePlate, List<Tire> i_Tiers)
+        public Vehicle ()
         {
-            m_ModelName = i_ModelName;
+
+        }
+
+        public Vehicle (string i_LicensePlate, string i_ModelName,  List<Tire> i_Tiers)
+        {
             m_LicensePlate = i_LicensePlate;
+            m_ModelName = i_ModelName;
             m_Tiers = i_Tiers;
         }
         public override bool Equals(object obj)

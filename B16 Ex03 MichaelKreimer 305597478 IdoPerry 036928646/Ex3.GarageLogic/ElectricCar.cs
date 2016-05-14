@@ -10,13 +10,13 @@ namespace Ex03.GarageLogic.CarModels
     {
         private CarProperties m_CarProperties;
 
-        public ElectricCar(string i_ModelName, string i_LicensePlate, List<Tire> i_Tiers, float i_MaxHoursOfPower, CarProperties.eNumberOfDoors i_NumberOfDoors, CarProperties.eColors i_Color)
-        : base(i_ModelName, i_LicensePlate, i_Tiers, i_MaxHoursOfPower)
+        public ElectricCar(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, float i_MaxHoursOfPower, CarProperties.eNumberOfDoors i_NumberOfDoors, CarProperties.eColors i_Color)
+        : base(i_LicensePlate, i_ModelName, i_Tiers, i_MaxHoursOfPower)
         {
             m_CarProperties = new CarProperties(i_NumberOfDoors, i_Color);
         }
-        public ElectricCar(string i_ModelName, string i_LicensePlate, List<Tire> i_Tiers, float i_MaxHoursOfPower, float i_InitialHoursOfPower, CarProperties.eNumberOfDoors i_NumberOfDoors, CarProperties.eColors i_Color)
-        : base(i_ModelName, i_LicensePlate, i_Tiers, i_MaxHoursOfPower, i_InitialHoursOfPower)
+        public ElectricCar(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, float i_MaxHoursOfPower, float i_InitialHoursOfPower, CarProperties.eNumberOfDoors i_NumberOfDoors, CarProperties.eColors i_Color)
+        : base(i_LicensePlate, i_ModelName, i_Tiers, i_MaxHoursOfPower, i_InitialHoursOfPower)
         {
             m_CarProperties = new CarProperties(i_NumberOfDoors, i_Color);
         }

@@ -101,7 +101,7 @@ namespace Ex03.GarageLogic
             }
         }
     
-        public string getVehicleData(string i_VehiclePlateNumber)
+        public string GetVehicleData(string i_VehiclePlateNumber)
         {
             Costumer costumer;
             string vehicleData = null;
