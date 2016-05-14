@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUi
             {
                 try
                 {
-                    option = getMainMenuOption();
+                    option = MainMenu.GetOption();
                     doMainMainOption(option);
                 }
                 catch (FormatException ex)
@@ -72,10 +72,7 @@ namespace Ex03.ConsoleUi
             }
         }
 
-        private MainMenu.eMainMenu getMainMenuOption()
-        {
-            return EnumInputHandler<MainMenu.eMainMenu>(MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue);
-        }
+
 
         private void printFullVehicleDetails()
         {
@@ -119,16 +116,11 @@ namespace Ex03.ConsoleUi
 
         private Vehicle getVehicleInput()
         {
-            string msg = string.Format(
-@"What kind of vehicle do you own?
-0 - Regular Bike
-1 - Electric Bike
-2 - Regular Car
-3 - Electric Car 
-4 - Truck
-");
+            string msg = string.Format("What kind of vehicle do you own?{0}", Environment.NewLine);
+
             UI.PrintMessage(msg);
-            int choice = UI.GetIntegerFromUser(0, 4);
+            UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
+            VehicleCatalog.eVehicleCatalog option = VehicleCatalog.GetOption();
             throw new NotImplementedException();
         }
 
@@ -168,20 +160,6 @@ namespace Ex03.ConsoleUi
             return UI.GetStringFromUser();
         }
 
-        public static T EnumInputHandler<T>(int i_MinValue, int i_maxValue)
-        {
-            int input = int.Parse(Console.ReadLine());
-            if (!IntegerInRange(input, i_MinValue, i_maxValue))
-            {
-                throw new ValueOutOfRangeException(i_MinValue, i_maxValue);
-            }
 
-            return (T)Enum.ToObject(typeof(T), input);
-        }
-
-        public static bool IntegerInRange(int input, int i_MinValue, int i_maxValue)
-        {
-            return (input >= i_MinValue && input <= i_maxValue);
-        }
     }
 }

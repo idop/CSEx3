@@ -31,7 +31,7 @@ namespace Ex03.ConsoleUi
 
         internal static void PrintMessage(string msg)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(msg);
         }
 
         internal static string GetStringFromUser()

@@ -43,6 +43,7 @@
     <Compile Include="FuelMotorCycle.cs" />
     <Compile Include="FuelVehicle.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="GarageUtils.cs" />
     <Compile Include="MotorCycleProperties.cs" />
     <Compile Include="FuelCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="TruckProperties.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="VehicleCatalog.cs" />
     <Compile Include="VehicleFactory.cs" />
     <Compile Include="VehicleModel.cs" />
   </ItemGroup>

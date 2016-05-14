@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, Costumer> m_Costumers = new Dictionary<string, Costumer>();
-
+        private VehicleFactory m_Factory = new VehicleFactory();
         public void InsertVehicle(Vehicle i_Vehicle)
         {
             m_Vehicles.Add(i_Vehicle.LicensePlate, i_Vehicle);
@@ -117,5 +117,6 @@ namespace Ex03.GarageLogic
 
             return fuelLeft;
         }
+
     }
 }

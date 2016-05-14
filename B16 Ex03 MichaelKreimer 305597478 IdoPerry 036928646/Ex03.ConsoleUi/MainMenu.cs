@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUi.Menus
 {
 
     public class MainMenu
     {
-        public const int k_MinEnumValue = 0;
-        public const int k_MaxEnumValue = 7;
+        private const int k_MinEnumValue = 0;
+        private const int k_MaxEnumValue = 7;
         public enum eMainMenu
         {
             EnterNewVehicle,
@@ -42,6 +42,11 @@ namespace Ex03.ConsoleUi.Menus
 
             return menuDisplayString.ToString();
         }
-        
+
+        public static eMainMenu GetOption()
+        {
+            return GarageUtils.GetEnumOption<eMainMenu>(k_MinEnumValue,k_MaxEnumValue);
+        }
+
     }
 }
