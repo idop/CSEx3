@@ -43,9 +43,9 @@ namespace Ex03.ConsoleUi.Menus
             return menuDisplayString.ToString();
         }
 
-        public static eMainMenu GetOption()
+        public static eMainMenu GetOption(string i_Input)
         {
-            return GarageUtils.GetEnumOption<eMainMenu>(k_MinEnumValue,k_MaxEnumValue);
+            return GarageUtils.GetEnumOption<eMainMenu>(i_Input, k_MinEnumValue,k_MaxEnumValue);
         }
 
     }

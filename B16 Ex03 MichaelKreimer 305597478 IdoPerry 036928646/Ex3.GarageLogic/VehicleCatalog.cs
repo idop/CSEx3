@@ -34,9 +34,9 @@ namespace Ex03.GarageLogic
             return vehicleCatalogUiDisplay;
         }
 
-        public static eVehicleCatalog GetOption()
+        public static eVehicleCatalog GetOption(string i_Input)
         {
-            return GarageUtils.GetEnumOption<eVehicleCatalog>(k_MinEnumValue, k_MaxEnumValue);
+            return GarageUtils.GetEnumOption<eVehicleCatalog>(i_Input, k_MinEnumValue, k_MaxEnumValue);
         }
     }
 }

@@ -20,11 +20,13 @@ namespace Ex03.ConsoleUi
             UI.ClearConsle();
             UI.DisplayMainMenu();
             MainMenu.eMainMenu option;
+            string input;
             while (m_UserWantsToUseProgram)
             {
                 try
                 {
-                    option = MainMenu.GetOption();
+                    input = Console.ReadLine();
+                    option = MainMenu.GetOption(input);
                     doMainMainOption(option);
                 }
                 catch (FormatException ex)
@@ -120,7 +122,8 @@ namespace Ex03.ConsoleUi
 
             UI.PrintMessage(msg);
             UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
-            VehicleCatalog.eVehicleCatalog option = VehicleCatalog.GetOption();
+            string input = Console.ReadLine();
+            VehicleCatalog.eVehicleCatalog option = VehicleCatalog.GetOption(input);
             throw new NotImplementedException();
         }
 

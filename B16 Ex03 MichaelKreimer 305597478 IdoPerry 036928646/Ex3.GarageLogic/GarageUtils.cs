@@ -6,20 +6,20 @@ namespace Ex03.GarageLogic
 {
     public static class GarageUtils
     {
-        public static T GetEnumOption<T>(int i_MinValue, int i_maxValue)
+        public static T GetEnumOption<T>(string i_Input, int i_MinValue, int i_maxValue)
         {
-            int input = int.Parse(Console.ReadLine());
-            if (!IntegerInRange(input, i_MinValue, i_maxValue))
+            int intInput = int.Parse(i_Input);
+            if (!IntegerInRange(intInput, i_MinValue, i_maxValue))
             {
                 throw new ValueOutOfRangeException(i_MinValue, i_maxValue);
             }
 
-            return (T)Enum.ToObject(typeof(T), input);
+            return (T)Enum.ToObject(typeof(T), i_Input);
         }
 
-        public static bool IntegerInRange(int input, int i_MinValue, int i_maxValue)
+        public static bool IntegerInRange(int i_Input, int i_MinValue, int i_maxValue)
         {
-            return (input >= i_MinValue && input <= i_maxValue);
+            return (i_Input >= i_MinValue && i_Input <= i_maxValue);
         }
     }
 }
