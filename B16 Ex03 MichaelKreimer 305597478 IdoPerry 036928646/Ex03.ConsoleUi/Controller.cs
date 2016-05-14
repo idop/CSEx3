@@ -26,7 +26,7 @@ namespace Ex03.ConsoleUi
                 try
                 {
                     input = UI.GetInput();
-                    option = GarageUtils.GetEnumOption<MainMenu.eMainMenu>(input, MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue)
+                    option = MainMenu.GetOption(input);
                     doMainMainOption(option);
                 }
                 catch (FormatException ex)
@@ -78,7 +78,9 @@ namespace Ex03.ConsoleUi
 
         private void printFullVehicleDetails()
         {
-            m_Garage.getVehicleData(getLicensePlateNumberFromUser());
+            string msg = m_Garage.GetVehicleData(getLicensePlateNumberFromUser());
+            UI.PrintMessage(msg);
+
         }
 
         private void chargeVehicle()
@@ -97,13 +99,13 @@ namespace Ex03.ConsoleUi
             }
             else
             {
-                Costumer costumer = getCostumerInput(licensePlate);
+                Costumer costumer = getCostumerInput();
                 m_Garage.InsertCostumer(costumer);
             }
             
         }
 
-        private Costumer getCostumerInput(string i_LicensePlate) // TODO GET VEHICLE INP
+        private Costumer getCostumerInput() // TODO GET VEHICLE INP
         {
             string msg = "Insert name: ";
             UI.PrintMessage(msg);
@@ -111,45 +113,19 @@ namespace Ex03.ConsoleUi
             msg = "insert phone number: ";
             UI.PrintMessage(msg);
             string phoneNumber = UI.GetInput();
-            Vehicle vehicle = getVehicleInput(i_LicensePlate);
+            Vehicle vehicle = getVehicleInput();
             return new Costumer(name, phoneNumber, Costumer.eVehicleStatus.InRepair , vehicle);
         }
 
-        private Vehicle getVehicleInput(string i_LicensePlate)
+        private Vehicle getVehicleInput()
         {
-            string msg = string.Format("Please choose the vehicle type you wish to add {0}", Environment.NewLine);
+            string msg = string.Format("What kind of vehicle do you own?{0}", Environment.NewLine);
 
             UI.PrintMessage(msg);
             UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
             string input = UI.GetInput();
-            bool invalidinput = true;
-            VehicleCatalog.eVehicleCatalog option = 0;
-            while (invalidinput)
-            {
-                try
-                {
-                    option = GarageUtils.GetEnumOption<VehicleCatalog.eVehicleCatalog>(input, VehicleCatalog.k_MinEnumValue, VehicleCatalog.k_MaxEnumValue);
-                    invalidinput = false;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(k_InvalidMsg, ex.Message);
-                }
-            }
-
-            return getSpecificVehicle(i_LicensePlate, option);
-        }
-
-        private Vehicle getSpecificVehicle(string i_LicensePlate,VehicleCatalog.eVehicleCatalog i_Option)
-        {
-            bool invalidinput = true;
-            Vehicle specificVehicle = null;
-            //string[] vehicleProperties = m_Garage.GetInputVhiecleProperties 
-            while (invalidinput)
-            {
-            }
-
-            return specificVehicle;
+            VehicleCatalog.eVehicleCatalog option = VehicleCatalog.GetOption(input);
+            throw new NotImplementedException();
         }
 
         private void showFindVehicleByLicencePlateSubMenu()
@@ -180,7 +156,7 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage("Please Select the fuel Type");
             UI.PrintMessage(FuelTypes.GetFuelTypesUiDisplay());
             string input = UI.GetInput();
-            FuelTypes.eFuelType fuelType = GarageUtils.GetEnumOption<FuelTypes.eFuelType>(input, FuelTypes.k_MinEnumValue, FuelTypes.k_MaxEnumValue);
+            FuelTypes.eFuelType fuelType = FuelTypes.GetOption(input);
             float fuelToFill = float.Parse(UI.GetInput());
             m_Garage.addGasToVehicle(plateNumber, fuelType, fuelToFill);
         }
