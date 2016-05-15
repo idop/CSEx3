@@ -108,7 +108,7 @@ namespace Ex03.ConsoleUi
             string msg = "Please enter the costumer name: ";
             UI.PrintMessage(msg);
             string name = UI.GetInput();
-            msg = "Please enter the costumer phone number: ";
+            msg = "Please enter the customer phone number: ";
             UI.PrintMessage(msg);
             string phoneNumber = UI.GetInput();
             Vehicle vehicle = getVehicleInput(i_LicensePlate);
