@@ -6,38 +6,38 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, Costumer> m_Costumers = new Dictionary<string, Costumer>();
+        private Dictionary<string, Customer> m_Customers = new Dictionary<string, Customer>();
         private VehicleFactory m_Factory = new VehicleFactory();
-        public void InsertCostumer(Costumer i_Costumer)
+        public void InsertCustomer(Customer i_Customer)
         {
-            m_Costumers.Add(i_Costumer.CostumerVehicle.LicensePlate, i_Costumer);
+            m_Customers.Add(i_Customer.CustomerVehicle.LicensePlate, i_Customer);
         }
         public bool IsVehicleAlreadyExists(string i_VehiclePlateNumber)
         {
-            return m_Costumers.ContainsKey(i_VehiclePlateNumber);
+            return m_Customers.ContainsKey(i_VehiclePlateNumber);
         }
-        public List<string> DisplayVehiclesById(string i_VehicleId, Costumer.eVehicleStatus i_VehicleStatus)
+        public List<string> DisplayVehiclesById(string i_VehicleId, Customer.eVehicleStatus i_VehicleStatus)
         {
             List<string> listOfVehiclesPlates = new List<string>();
-            foreach (Costumer costumer in m_Costumers.Values)
+            foreach (Customer customer in m_Customers.Values)
             {
 
-                if (i_VehicleStatus.Equals(Costumer.eVehicleStatus.All) || costumer.Status.Equals(i_VehicleStatus))
+                if (i_VehicleStatus.Equals(Customer.eVehicleStatus.All) || customer.Status.Equals(i_VehicleStatus))
                 {
-                    listOfVehiclesPlates.Add(costumer.CostumerVehicle.LicensePlate);
+                    listOfVehiclesPlates.Add(customer.CustomerVehicle.LicensePlate);
                 }
                 
             }
      
             return listOfVehiclesPlates;
         }
-        public void ChangeVehicleStatus(string i_VehiclePlateNumber, Costumer.eVehicleStatus i_NewVehicleStatus)
+        public void ChangeVehicleStatus(string i_VehiclePlateNumber, Customer.eVehicleStatus i_NewVehicleStatus)
         {
             // notes : a) maybe change to private
             //         b) reconsider for throw exception
-            Costumer costumerToChange;
+            Customer costumerToChange;
             bool carExists;
-            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumerToChange);
+            carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumerToChange);
             if (carExists)
             {
                 costumerToChange.Status = i_NewVehicleStatus;
@@ -45,12 +45,12 @@ namespace Ex03.GarageLogic
         }
         public void InflateVehicleTiresToMax(string i_VehiclePlateNumber)
         {
-            Costumer costumer;
+            Customer costumer;
             bool carExists;
-            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
+            carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                foreach (Tire tire in costumer.CostumerVehicle.Tires)
+                foreach (Tire tire in costumer.CustomerVehicle.Tires)
                 {
                     tire.AddAirPressure(tire.calcAirPressureLeftToFill());
                 }
@@ -59,14 +59,14 @@ namespace Ex03.GarageLogic
         public void addGasToVehicle(string i_VehiclePlateNumber, FuelTypes.eFuelType i_FuelType, float i_FuelToAdd)
         {
             // note: * add range exception
-            Costumer costumer;
+            Customer costumer;
             bool carExists;
-            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
+            carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                if (costumer.CostumerVehicle is FuelVehicle)
+                if (costumer.CustomerVehicle is FuelVehicle)
                 {
-                    ((FuelVehicle)costumer.CostumerVehicle).Refuel(i_FuelToAdd, i_FuelType);
+                    ((FuelVehicle)costumer.CustomerVehicle).Refuel(i_FuelToAdd, i_FuelType);
                 }
                 else
                 {
@@ -81,14 +81,14 @@ namespace Ex03.GarageLogic
         public void ChargeElectricVehicle(string i_VehiclePlateNumber, float i_MinutesForCharging)
         {
             // note: * add range exception
-            Costumer costumer;
+            Customer costumer;
             bool carExists;
-            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
+            carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                if (costumer.CostumerVehicle is ElectricVehicle)
+                if (costumer.CustomerVehicle is ElectricVehicle)
                 {
-                    ((ElectricVehicle)costumer.CostumerVehicle).Charge(i_MinutesForCharging);
+                    ((ElectricVehicle)costumer.CustomerVehicle).Charge(i_MinutesForCharging);
                 }
                 else
                 {
@@ -103,13 +103,13 @@ namespace Ex03.GarageLogic
     
         public string GetVehicleData(string i_VehiclePlateNumber)
         {
-            Costumer costumer;
+            Customer costumer;
             string vehicleData = null;
             bool carExists;
-            carExists = m_Costumers.TryGetValue(i_VehiclePlateNumber, out costumer);
+            carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
             if (carExists)
             {
-                vehicleData = costumer.CostumerVehicle.ToString();
+                vehicleData = costumer.CustomerVehicle.ToString();
             }
             else
             {

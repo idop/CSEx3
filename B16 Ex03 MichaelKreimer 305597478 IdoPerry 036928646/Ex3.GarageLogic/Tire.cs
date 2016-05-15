@@ -6,18 +6,11 @@ namespace Ex03.GarageLogic
 {
     public class Tire
     {
-        private const int k_MinPressure = 0;
-        private readonly string r_ManufacturerName;
-        private readonly int r_MaxPressure;
+        public const float k_MinValueAllowed = 0f;
+        private readonly float r_MaxAllowedAirPressure = 0f;
+        private readonly string r_ManufacturerName = string.Empty;
+        private float m_CurrentAirPressure = 0f;
 
-        public int MaxPressure
-        {
-            get
-            {
-                return r_MaxPressure;
-            }
-
-        }
         public string ManufacturerName
         {
             get
@@ -25,8 +18,6 @@ namespace Ex03.GarageLogic
                 return r_ManufacturerName;
             }
         }
-
-        private float m_CurrentAirPressure =0f;
 
         public float CurrentAirPressure
         {
@@ -36,13 +27,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        private readonly float r_MaxAllowedAirPressure;
 
-        public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure)
-        {
-            r_ManufacturerName = i_ManufacturerName;
-            r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;
-        }
 
         public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
         {
@@ -55,14 +40,14 @@ namespace Ex03.GarageLogic
         public void AddAirPressure(float i_AirToAdd)
         {
             float newAirPressure = i_AirToAdd + m_CurrentAirPressure;
-            if (newAirPressure > r_MaxAllowedAirPressure)
+            if (newAirPressure < r_MaxAllowedAirPressure)
             {
                 m_CurrentAirPressure = newAirPressure;
             }
             else
             {
                 float maxValueAllowd = r_MaxAllowedAirPressure - m_CurrentAirPressure;
-                throw new ValueOutOfRangeException(k_MinPressure, maxValueAllowd);
+                throw new ValueOutOfRangeException(k_MinValueAllowed, maxValueAllowd);
             }
         }
 
@@ -73,7 +58,7 @@ namespace Ex03.GarageLogic
 
         internal float calcAirPressureLeftToFill()
         {
-            return MaxPressure - m_CurrentAirPressure;
+            return r_MaxAllowedAirPressure - m_CurrentAirPressure;
         }
 
     }

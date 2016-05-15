@@ -7,19 +7,12 @@ namespace Ex03.GarageLogic
 {
     public class FuelVehicle : Vehicle
     {
-        private const int k_MinValueAllowed = 0;
+        public const int k_MinValueAllowed = 0;
         private const string k_InvalidArgumentMessage = "Entered fuel type of {0} does not match allowed fuel type of {1}.";
 
         private readonly FuelTypes.eFuelType r_FuelType;
-        private float m_CurrentFuelAmount = 0;
+        private float m_CurrentFuelAmount;
         private readonly float r_MaxFuelTankCapacity;
-
-        public FuelVehicle(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, FuelTypes.eFuelType i_FuelType, float i_MaxFuelTankCapacity)
-            : base(i_LicensePlate, i_ModelName, i_Tiers) 
-        {
-            r_FuelType = i_FuelType;
-            r_MaxFuelTankCapacity = i_MaxFuelTankCapacity;
-        }
 
         public FuelVehicle(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, FuelTypes.eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
             : base(i_LicensePlate, i_ModelName, i_Tiers)
@@ -54,7 +47,7 @@ namespace Ex03.GarageLogic
             if (i_FuelType == r_FuelType)
             {
                 float newFuelAmount = i_FuelToAdd + m_CurrentFuelAmount;
-                if(newFuelAmount > r_MaxFuelTankCapacity)
+                if(newFuelAmount < r_MaxFuelTankCapacity)
                 {
                     m_CurrentFuelAmount = newFuelAmount;
                 }

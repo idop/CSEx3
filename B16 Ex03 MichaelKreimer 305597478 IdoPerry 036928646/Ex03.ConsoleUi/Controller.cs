@@ -17,32 +17,28 @@ namespace Ex03.ConsoleUi
 
         private void ControlMainMenu()
         {
-            UI.ClearConsle();
-            UI.DisplayMainMenu();
             MainMenu.eMainMenu option;
             string input;
             while (m_UserWantsToUseProgram)
             {
+                UI.ClearConsle();
+                UI.DisplayMainMenu();
                 try
                 {
                     input = UI.GetInput();
                     option = GarageUtils.GetEnumOption<MainMenu.eMainMenu>(input, MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue); 
                     doMainMainOption(option);
                 }
-                catch (FormatException ex)
-                {
-                    UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
-                }
                 catch (ValueOutOfRangeException ex)
                 {
                     UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
                 }
-           
             }
         }
 
         private void doMainMainOption(MainMenu.eMainMenu i_Option)
         {
+            UI.ClearConsle();
             switch (i_Option)
             {
                 case MainMenu.eMainMenu.EnterNewVehicle:
@@ -70,7 +66,7 @@ namespace Ex03.ConsoleUi
                     m_UserWantsToUseProgram = false;
                     break;
                 default:
-                    break;
+                    throw new ValueOutOfRangeException(MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue);
             }
         }
 
@@ -95,26 +91,28 @@ namespace Ex03.ConsoleUi
             string licensePlate = getLicensePlateNumberFromUser();
             if (m_Garage.IsVehicleAlreadyExists(licensePlate))
             {
-                m_Garage.ChangeVehicleStatus(licensePlate , Costumer.eVehicleStatus.InRepair);
+                m_Garage.ChangeVehicleStatus(licensePlate , Customer.eVehicleStatus.InRepair);
             }
             else
             {
-                Costumer costumer = getCostumerInput(licensePlate);
-                m_Garage.InsertCostumer(costumer);
+                Customer costumer = getCustomerInput(licensePlate);
+                m_Garage.InsertCustomer(costumer);
+                UI.PrintMessage("New customer vehicle added succesfully. press any key to return to the main menu");
+                UI.GetInput();
             }
             
         }
 
-        private Costumer getCostumerInput(string i_LicensePlate) // TODO GET VEHICLE INP
+        private Customer getCustomerInput(string i_LicensePlate) // TODO GET VEHICLE INP
         {
-            string msg = "Insert costumer name: ";
+            string msg = "Please enter the costumer name: ";
             UI.PrintMessage(msg);
             string name = UI.GetInput();
-            msg = "insert costumer phone number: ";
+            msg = "Please enter the costumer phone number: ";
             UI.PrintMessage(msg);
             string phoneNumber = UI.GetInput();
             Vehicle vehicle = getVehicleInput(i_LicensePlate);
-            return new Costumer(name, phoneNumber, Costumer.eVehicleStatus.InRepair , vehicle);
+            return new Customer(name, phoneNumber, Customer.eVehicleStatus.InRepair , vehicle);
         }
 
         private Vehicle getVehicleInput(string i_LicensePlate)
@@ -144,7 +142,15 @@ namespace Ex03.ConsoleUi
                         m_Garage.TakeInputForParameter(i_Option, i, UI.GetInput());
                         invalidInput = false;
                     }
-                    catch (Exception ex)
+                    catch (ValueOutOfRangeException ex)
+                    {
+                        UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                    }
+                    catch (FormatException ex)
+                    {
+                        UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                    }
+                    catch (ArgumentException ex)
                     {
                         UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
                     }
@@ -168,7 +174,7 @@ namespace Ex03.ConsoleUi
 2 - Paid
 ");
             UI.PrintMessage(msg);
-            Costumer.eVehicleStatus vehicleStatus = (Costumer.eVehicleStatus)UI.GetIntegerFromUser(0, 2);
+            Customer.eVehicleStatus vehicleStatus = (Customer.eVehicleStatus)UI.GetIntegerFromUser(0, 2);
             m_Garage.ChangeVehicleStatus(plateNumber, vehicleStatus);
         }
         private void inflateVehicleTiresToMax()

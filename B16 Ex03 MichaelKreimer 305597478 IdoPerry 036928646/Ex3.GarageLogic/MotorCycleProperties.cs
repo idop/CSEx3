@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic.MotorCycleModels
 {2} - AB
 {3} - B1",
 (int)eLicenseType.A,
-(int)eLicenseType.A,
+(int)eLicenseType.A1,
 (int)eLicenseType.AB,
 (int)eLicenseType.B1);
 

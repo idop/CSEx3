@@ -1,10 +1,10 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public class Costumer
+    public class Customer
     {
         private string m_Name;
         private string m_PhoneNumber;
-        private Vehicle m_CostumerVehicle;
+        private Vehicle m_CustomerVehicle;
         private eVehicleStatus m_Status;
 
         public enum eVehicleStatus
@@ -28,15 +28,15 @@
 
         public override int GetHashCode()
         {
-            return m_CostumerVehicle.GetHashCode();
+            return m_CustomerVehicle.GetHashCode();
         }
 
-        public Costumer(string i_Name, string i_PhoneNumber, eVehicleStatus i_Stauts, Vehicle i_Vehicle)
+        public Customer(string i_Name, string i_PhoneNumber, eVehicleStatus i_Stauts, Vehicle i_Vehicle)
         {
             m_Name = i_Name;
             m_PhoneNumber = i_PhoneNumber;
             m_Status = i_Stauts;
-            m_CostumerVehicle = i_Vehicle;
+            m_CustomerVehicle = i_Vehicle;
         }
         public string Name
         {
@@ -61,16 +61,16 @@
             }
         }
 
-        public Vehicle CostumerVehicle
+        public Vehicle CustomerVehicle
         {
             get
             {
-                return m_CostumerVehicle;
+                return m_CustomerVehicle;
             }
 
             set
             {
-                m_CostumerVehicle = value;
+                m_CustomerVehicle = value;
             }
         }
     }

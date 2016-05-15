@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ex03.GarageLogic.TruckModels;
+using Ex03.GarageLogic.CarModels;
 
 namespace Ex03.GarageLogic
 {
     public class VehicleFactory
     {
-        private const int k_numberofFuelVehicleProperites = 9;
-        private const int k_numberofElectricVehicleProperites = 8;
         private const string k_VehicleModelName = "model name";
         private const string k_TireManufcturerName = "tire manufacturer name";
         private const string k_TireMaxmiumAirPressure = "tire maxmium allowed air pressure";
@@ -42,13 +42,19 @@ namespace Ex03.GarageLogic
             switch (i_Option)
             {
                 case VehicleCatalog.eVehicleCatalog.FuelMotorCycle:
+                    numberOfInputParameters = typeof(FuelMotorCycle).GetConstructors()[0].GetParameters().Length;
+                    break;
                 case VehicleCatalog.eVehicleCatalog.FuelTruck:
+                    numberOfInputParameters = typeof(FuelTruck).GetConstructors()[0].GetParameters().Length;
+                    break;
                 case VehicleCatalog.eVehicleCatalog.FuelCar:
-                    numberOfInputParameters = k_numberofFuelVehicleProperites;
+                    numberOfInputParameters = typeof(FuelCar).GetConstructors()[0].GetParameters().Length;
                     break;
                 case VehicleCatalog.eVehicleCatalog.ElectricCar:
+                    numberOfInputParameters = typeof(ElectricCar).GetConstructors()[0].GetParameters().Length;
+                    break;
                 case VehicleCatalog.eVehicleCatalog.ElectricMotorCycle:
-                    numberOfInputParameters = k_numberofElectricVehicleProperites;
+                    numberOfInputParameters = typeof(ElectricMotorCycle).GetConstructors()[0].GetParameters().Length;
                     break;
                 default:
                     break;
@@ -88,6 +94,55 @@ namespace Ex03.GarageLogic
             switch (i)
             {
                 case 0:
+                case 1:
+                case 2:
+                case 3:
+                    inputDisplayMessage = getVehicleDispleyMessageForParamater(i);
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    inputDisplayMessage = getFuelVehicleDisplayMessageForParameter(i);
+                    break;
+                case 7:
+                    inputDisplayMessage = k_LicenseType + Environment.NewLine + MotorCycleProperties.GetLicenseTypeUiDisplay();
+                    break;
+                case 8:
+                    inputDisplayMessage = k_EngineDisplacement;
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+            return inputDisplayMessage;
+        }
+
+        private string getFuelVehicleDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 4:
+                    inputDisplayMessage = k_FuelType + Environment.NewLine + FuelTypes.GetFuelTypesUiDisplay();
+                    break;
+                case 5:
+                    inputDisplayMessage = k_MaxFuelCapcity;
+                    break;
+                case 6:
+                    inputDisplayMessage = k_CurrentFuel;
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+
+            return inputDisplayMessage;
+        }
+
+        private string getVehicleDispleyMessageForParamater(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 0:
                     inputDisplayMessage = k_VehicleModelName;
                     break;
                 case 1:
@@ -99,23 +154,8 @@ namespace Ex03.GarageLogic
                 case 3:
                     inputDisplayMessage = k_TireCurrentAirPressure;
                     break;
-                case 4:
-                    inputDisplayMessage = k_FuelType + Environment.NewLine + FuelTypes.GetFuelTypesUiDisplay();
-                    break;
-                case 5:
-                    inputDisplayMessage = k_MaxFuelCapcity;
-                    break;
-                case 6:
-                    inputDisplayMessage = k_CurrentFuel;
-                    break;
-                case 7:
-                    inputDisplayMessage = k_LicenseType + Environment.NewLine + MotorCycleProperties.GetLicenseTypeUiDisplay();
-                    break;
-                case 8:
-                    inputDisplayMessage = k_EngineDisplacement;
-                    break;
                 default:
-                    break;
+                    throw new IndexOutOfRangeException();
             }
             return inputDisplayMessage;
         }
@@ -185,25 +225,15 @@ namespace Ex03.GarageLogic
             switch (i)
             {
                 case 0:
-                    m_InputModelName = i_input;
-                    break;
                 case 1:
-                    m_InputManufacturerName = i_input;
-                    break;
                 case 2:
-                    m_InputMaxAllowedAirPressure = float.Parse(i_input);
-                    break;
                 case 3:
-                    m_InputStartingAirPressure = float.Parse(i_input);
+                    takeVehicleInputParameter(i, i_input);
                     break;
                 case 4:
-                    m_InputFuelType = GarageUtils.GetEnumOption<FuelTypes.eFuelType>(i_input, FuelTypes.k_MinEnumValue, FuelTypes.k_MaxEnumValue);
-                    break;
                 case 5:
-                    m_InputMaxFuelCapacity = float.Parse(i_input);
-                    break;
                 case 6:
-                    m_InputinitialFuel = float.Parse(i_input);
+                    takeFuelVehicleInputParameter(i, i_input);
                     break;
                 case 7:
                     m_InputLicenseType = GarageUtils.GetEnumOption<MotorCycleProperties.eLicenseType>(i_input, MotorCycleProperties.k_LicenseTypeMinEnumValue, MotorCycleProperties.k_LicenseTypeMaxEnumValue);
@@ -213,6 +243,45 @@ namespace Ex03.GarageLogic
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void takeVehicleInputParameter(int i, string i_input)
+        {
+            switch(i)
+            {
+                case 0:
+                    m_InputModelName = i_input;
+                    break;
+                case 1:
+                    m_InputManufacturerName = i_input;
+                    break;
+                case 2:
+                    m_InputMaxAllowedAirPressure = float.Parse(i_input);
+                    break;
+                case 3:
+                    m_InputStartingAirPressure = GarageUtils.ParseFloatRangeInput(i_input, Tire.k_MinValueAllowed, m_InputMaxAllowedAirPressure);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+        }
+
+        private void takeFuelVehicleInputParameter(int i, string i_input)
+        {
+            switch (i)
+            {
+                case 4:
+                    m_InputFuelType = GarageUtils.GetEnumOption<FuelTypes.eFuelType>(i_input, FuelTypes.k_MinEnumValue, FuelTypes.k_MaxEnumValue);
+                    break;
+                case 5:
+                    m_InputMaxFuelCapacity = float.Parse(i_input);
+                    break;
+                case 6:
+                    m_InputinitialFuel = GarageUtils.ParseFloatRangeInput(i_input, FuelVehicle.k_MinValueAllowed,m_InputMaxFuelCapacity);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
             }
         }
     }

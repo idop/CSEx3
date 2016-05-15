@@ -10,12 +10,6 @@ namespace Ex03.GarageLogic
         private float m_CurrentHoursOfPower = 0;
         private readonly float r_MaxHoursOfPower;
 
-        public ElectricVehicle(string i_LicensePlate, string i_ModelName,  List<Tire> i_Tiers, float i_MaxHoursOfPower)
-            : base(i_LicensePlate, i_ModelName, i_Tiers)
-        {
-            r_MaxHoursOfPower = i_MaxHoursOfPower;
-        }
-
         public ElectricVehicle(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, float i_MaxHoursOfPower, float i_InitalHoursOfPower)
             : base(i_LicensePlate, i_ModelName, i_Tiers)
         {
@@ -34,7 +28,7 @@ namespace Ex03.GarageLogic
         public void Charge(float i_HoursOfPowerToAdd)
         {
             float newFuelAmount = i_HoursOfPowerToAdd + m_CurrentHoursOfPower;
-            if (newFuelAmount > r_MaxHoursOfPower)
+            if (newFuelAmount < r_MaxHoursOfPower)
             {
                 m_CurrentHoursOfPower = newFuelAmount;
             }
