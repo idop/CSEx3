@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
             return (i_Input >= i_MinValue && i_Input <= i_maxValue);
         }
 
-        public static bool IntegerInRange(int i_Input, int i_MinValue, int i_maxValue)
+        private static bool IntegerInRange(int i_Input, int i_MinValue, int i_maxValue)
         {
             return (i_Input >= i_MinValue && i_Input <= i_maxValue);
         }

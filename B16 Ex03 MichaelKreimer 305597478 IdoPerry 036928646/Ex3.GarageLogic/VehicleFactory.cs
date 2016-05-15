@@ -9,15 +9,21 @@ namespace Ex03.GarageLogic
 {
     public class VehicleFactory
     {
-        private const string k_VehicleModelName = "model name";
-        private const string k_TireManufcturerName = "tire manufacturer name";
-        private const string k_TireMaxmiumAirPressure = "tire maxmium allowed air pressure";
-        private const string k_TireCurrentAirPressure = "tire current air pressure";
-        private const string k_FuelType = "fuel type";
-        private const string k_MaxFuelCapcity = "maximum fuel capcity";
-        private const string k_CurrentFuel = "current fuel in vehicle";
-        private const string k_LicenseType = "License type";
-        private const string k_EngineDisplacement = "Engine Displacement";
+        private const string k_VehicleModelNameDisplay = "model name";
+        private const string k_TireManufcturerNameDisplay = "tire manufacturer name";
+        private const string k_TireMaxmiumAirPressureDisplay = "tire maxmium allowed air pressure";
+        private const string k_TireCurrentAirPressureDisplay = "tire current air pressure";
+        private const string k_FuelTypeDisplay = "fuel type";
+        private const string k_MaxFuelCapcityDisplay = "maximum fuel capcity";
+        private const string k_CurrentFuelDisplay = "current fuel in vehicle";
+        private const string k_LicenseTypeDisplay = "License type";
+        private const string k_EngineDisplacementDisplay = "Engine Displacement";
+        private const string k_ColorDisplay = "Color";
+        private const string k_NumberOfDoorsDisplay = "Number Of Doors";
+        private const string k_CarryingDangerousMaterialsDisplay = "Does the truck Carries Dangerous Materials? (True/False)";
+        private const string k_MaxCarryLoadDisplay = "Max Carry Load";
+        private const string k_MaxHoursOfPowerDisplay= "Max Hours Of Power";
+        private const string k_CurrentHoursOfPowerDisplay = "Current Hours Of Power";
         ///Vehicle Protperties
         private string m_InputLicensePlate;
         string m_InputModelName;
@@ -25,15 +31,27 @@ namespace Ex03.GarageLogic
         string m_InputManufacturerName;
         float m_InputMaxAllowedAirPressure;
         float m_InputStartingAirPressure;
-
         ///Fuel Vehicele Properties
         FuelTypes.eFuelType m_InputFuelType;
         float m_InputMaxFuelCapacity;
         float m_InputinitialFuel;
-
-        ///MotorCycleProperties
+        ///Electric Vehicle Properties
+        private float m_InputMaxHoursOfPower;
+        private float m_InputCurrentHoursOfPower;
+        ///MotorCycle Properties
         MotorCycleProperties.eLicenseType m_InputLicenseType;
         int m_InputEngineDisplacement;
+        ///Car Properties
+        private CarProperties.eNumberOfDoors m_InputNumberOfDoors;
+        private CarProperties.eColors m_InputColor;
+        ///Truck Properties
+        private bool m_InputIsCarryingDangerousMaterials;
+        private float m_InputMaxCarryLoad;
+
+        public void StartNewVehicleInputSequence(string i_LicensePlate) // Consider Params Build Helpers Cleanup
+        {
+            m_InputLicensePlate = i_LicensePlate;
+        }
 
         public int GetNumberOfInputParametersForSpecificVehicle(VehicleCatalog.eVehicleCatalog i_Option)
         {
@@ -74,17 +92,149 @@ namespace Ex03.GarageLogic
                     inputDisplayMessage = getFuelMotorCycleDisplayMessageForParameter(i);
                     break;
                 case VehicleCatalog.eVehicleCatalog.FuelTruck:
+                    inputDisplayMessage = getFuelTruckDisplayMessageForParameter(i);
                     break;
                 case VehicleCatalog.eVehicleCatalog.FuelCar:
+                    inputDisplayMessage = getFuelCarDisplayMessageForParameter(i);
                     break;
                 case VehicleCatalog.eVehicleCatalog.ElectricCar:
+                    inputDisplayMessage = getElectricCarDisplayMessageForParameter(i);
                     break;
                 case VehicleCatalog.eVehicleCatalog.ElectricMotorCycle:
+                    inputDisplayMessage = getElectricMotorCycleDisplayMessageForParameter(i);
                     break;
                 default:
                     break;
             }
 
+            return inputDisplayMessage;
+        }
+
+        private string getElectricMotorCycleDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    inputDisplayMessage = getVehicleDispleyMessageForParamater(i);
+                    break;
+                case 4:
+                case 5:
+                    inputDisplayMessage = getElectircVehicleDisplayMessageForParameter(i);
+                    break;
+                case 6:
+                    inputDisplayMessage = k_LicenseTypeDisplay + Environment.NewLine + MotorCycleProperties.GetLicenseTypeUiDisplay();
+                    break;
+                case 7:
+                    inputDisplayMessage = k_EngineDisplacementDisplay;
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+            return inputDisplayMessage;
+        }
+
+        private string getElectricCarDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    inputDisplayMessage = getVehicleDispleyMessageForParamater(i);
+                    break;
+                case 4:
+                case 5:
+                    inputDisplayMessage = getElectircVehicleDisplayMessageForParameter(i);
+                    break;
+                case 6:
+                    inputDisplayMessage = k_NumberOfDoorsDisplay + Environment.NewLine + CarProperties.GetNumberOfDoorsUiDisplay();
+                    break;
+                case 7:
+                    inputDisplayMessage = k_ColorDisplay + Environment.NewLine + CarProperties.GetColorsUiDisplay();
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+            return inputDisplayMessage;
+        }
+
+        private string getElectircVehicleDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 4:
+                    inputDisplayMessage = k_MaxHoursOfPowerDisplay;
+                    break;
+                case 5:
+                    inputDisplayMessage = k_CurrentHoursOfPowerDisplay;
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+
+            return inputDisplayMessage;
+        }
+
+        private string getFuelTruckDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    inputDisplayMessage = getVehicleDispleyMessageForParamater(i);
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    inputDisplayMessage = getFuelVehicleDisplayMessageForParameter(i);
+                    break;
+                case 7:
+                    inputDisplayMessage = k_CarryingDangerousMaterialsDisplay;
+                    break;
+                case 8:
+                    inputDisplayMessage = k_MaxCarryLoadDisplay;
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+            return inputDisplayMessage;
+        }
+
+        private string getFuelCarDisplayMessageForParameter(int i)
+        {
+            string inputDisplayMessage = string.Empty;
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    inputDisplayMessage = getVehicleDispleyMessageForParamater(i);
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    inputDisplayMessage = getFuelVehicleDisplayMessageForParameter(i);
+                    break;
+                case 7:
+                    inputDisplayMessage = k_NumberOfDoorsDisplay + Environment.NewLine + CarProperties.GetNumberOfDoorsUiDisplay();
+                    break;
+                case 8:
+                    inputDisplayMessage = k_ColorDisplay + Environment.NewLine + CarProperties.GetColorsUiDisplay();
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
             return inputDisplayMessage;
         }
 
@@ -105,10 +255,10 @@ namespace Ex03.GarageLogic
                     inputDisplayMessage = getFuelVehicleDisplayMessageForParameter(i);
                     break;
                 case 7:
-                    inputDisplayMessage = k_LicenseType + Environment.NewLine + MotorCycleProperties.GetLicenseTypeUiDisplay();
+                    inputDisplayMessage = k_LicenseTypeDisplay + Environment.NewLine + MotorCycleProperties.GetLicenseTypeUiDisplay();
                     break;
                 case 8:
-                    inputDisplayMessage = k_EngineDisplacement;
+                    inputDisplayMessage = k_EngineDisplacementDisplay;
                     break;
                 default:
                     throw new IndexOutOfRangeException();
@@ -122,13 +272,13 @@ namespace Ex03.GarageLogic
             switch (i)
             {
                 case 4:
-                    inputDisplayMessage = k_FuelType + Environment.NewLine + FuelTypes.GetFuelTypesUiDisplay();
+                    inputDisplayMessage = k_FuelTypeDisplay + Environment.NewLine + FuelTypes.GetFuelTypesUiDisplay();
                     break;
                 case 5:
-                    inputDisplayMessage = k_MaxFuelCapcity;
+                    inputDisplayMessage = k_MaxFuelCapcityDisplay;
                     break;
                 case 6:
-                    inputDisplayMessage = k_CurrentFuel;
+                    inputDisplayMessage = k_CurrentFuelDisplay;
                     break;
                 default:
                     throw new IndexOutOfRangeException();
@@ -143,26 +293,21 @@ namespace Ex03.GarageLogic
             switch (i)
             {
                 case 0:
-                    inputDisplayMessage = k_VehicleModelName;
+                    inputDisplayMessage = k_VehicleModelNameDisplay;
                     break;
                 case 1:
-                    inputDisplayMessage = k_TireManufcturerName;
+                    inputDisplayMessage = k_TireManufcturerNameDisplay;
                     break;
                 case 2:
-                    inputDisplayMessage = k_TireMaxmiumAirPressure;
+                    inputDisplayMessage = k_TireMaxmiumAirPressureDisplay;
                     break;
                 case 3:
-                    inputDisplayMessage = k_TireCurrentAirPressure;
+                    inputDisplayMessage = k_TireCurrentAirPressureDisplay;
                     break;
                 default:
                     throw new IndexOutOfRangeException();
             }
             return inputDisplayMessage;
-        }
-
-        public void StartNewVehicleInputSequence(string i_LicensePlate) // Consider Params Build Helpers Cleanup
-        {
-            m_InputLicensePlate = i_LicensePlate;
         }
 
         public void TakeInputForParameter(VehicleCatalog.eVehicleCatalog i_Option, int i, string i_input)
@@ -173,51 +318,137 @@ namespace Ex03.GarageLogic
                     takeFuelMotorCycleInputParameter(i, i_input);
                     break;
                 case VehicleCatalog.eVehicleCatalog.FuelTruck:
+                    takeFuelTruckInputParameter(i, i_input);
                     break;
                 case VehicleCatalog.eVehicleCatalog.FuelCar:
+                    takeFuelCarInputParameter(i, i_input);
                     break;
                 case VehicleCatalog.eVehicleCatalog.ElectricCar:
+                    takeElectricCarInputParameter(i, i_input);
                     break;
                 case VehicleCatalog.eVehicleCatalog.ElectricMotorCycle:
+                    takeElectricMotorCycleInputParameter(i, i_input);
                     break;
                 default:
-                    break;
+                    throw new IndexOutOfRangeException();
             }
         }
 
-        public Vehicle GetNewVehicle(VehicleCatalog.eVehicleCatalog i_Option)
+        private void takeElectricMotorCycleInputParameter(int i, string i_input)
         {
-            Vehicle newVehicle = null;
-            List<Tire> tires;
-            switch (i_Option)
+            switch (i)
             {
-                case VehicleCatalog.eVehicleCatalog.FuelMotorCycle:
-                    tires = createNewTiresList(MotorCycleProperties.k_NumberOfTires);
-                    newVehicle = new FuelMotorCycle(m_InputLicensePlate, m_InputModelName, tires, m_InputFuelType, m_InputMaxFuelCapacity, m_InputinitialFuel, m_InputLicenseType, m_InputEngineDisplacement);
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    takeVehicleInputParameter(i, i_input);
                     break;
-                case VehicleCatalog.eVehicleCatalog.FuelTruck:
+                case 4:
+                case 5:
+                    takeElectircVehicleInputParameter(i, i_input);
                     break;
-                case VehicleCatalog.eVehicleCatalog.FuelCar:
+                case 6:
+                    m_InputLicenseType = GarageUtils.GetEnumOption<MotorCycleProperties.eLicenseType>(i_input, MotorCycleProperties.k_LicenseTypeMinEnumValue, MotorCycleProperties.k_LicenseTypeMaxEnumValue);
                     break;
-                case VehicleCatalog.eVehicleCatalog.ElectricCar:
-                    break;
-                case VehicleCatalog.eVehicleCatalog.ElectricMotorCycle:
+                case 7:
+                    m_InputEngineDisplacement = int.Parse(i_input);
                     break;
                 default:
-                    break;
+                    throw new IndexOutOfRangeException();
             }
-
-            return newVehicle;
         }
 
-        private List<Tire> createNewTiresList(int k_NumberOfTires)
+        private void takeElectricCarInputParameter(int i, string i_input)
         {
-            List<Tire> tires = new List<Tire>(k_NumberOfTires);
-            for (int i = 0; i < k_NumberOfTires; ++i)
+            switch (i)
             {
-                tires.Add(new Tire(m_InputManufacturerName, m_InputMaxAllowedAirPressure, m_InputStartingAirPressure));
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    takeVehicleInputParameter(i, i_input);
+                    break;
+                case 4:
+                case 5:
+                    takeElectircVehicleInputParameter(i, i_input);
+                    break;
+                case 6:
+                    m_InputNumberOfDoors = GarageUtils.GetEnumOption<CarProperties.eNumberOfDoors>(i_input, CarProperties.k_NumberOfDoorsMinEnumValue, CarProperties.k_NumberOfDoorsMaxEnumValue);
+                    break;
+                case 7:
+                    m_InputColor = GarageUtils.GetEnumOption<CarProperties.eColors>(i_input, CarProperties.k_ColorMinEnumValue, CarProperties.k_ColorMaxEnumValue);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
             }
-            return tires;
+        }
+
+
+        private void takeElectircVehicleInputParameter(int i, string i_input)
+        {
+            switch (i)
+            {
+                case 4:
+                    m_InputMaxHoursOfPower = float.Parse(i_input);
+                    break;
+                case 5:
+                    m_InputCurrentHoursOfPower=  GarageUtils.ParseFloatRangeInput(i_input, ElectricVehicle.k_MinValueAllowed, m_InputMaxHoursOfPower);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+        }
+        private void takeFuelTruckInputParameter(int i, string i_input)
+        {
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    takeVehicleInputParameter(i, i_input);
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    takeFuelVehicleInputParameter(i, i_input);
+                    break;
+                case 7:
+                    m_InputIsCarryingDangerousMaterials = bool.Parse(i_input);
+                    break;
+                case 8:
+                    m_InputMaxCarryLoad = float.Parse(i_input); 
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+        }
+
+        private void takeFuelCarInputParameter(int i, string i_input)
+        {
+            switch (i)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    takeVehicleInputParameter(i, i_input);
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    takeFuelVehicleInputParameter(i, i_input);
+                    break;
+                case 7:
+                    m_InputNumberOfDoors = GarageUtils.GetEnumOption<CarProperties.eNumberOfDoors>(i_input, CarProperties.k_NumberOfDoorsMinEnumValue, CarProperties.k_NumberOfDoorsMaxEnumValue);
+                    break;
+                case 8:
+                    m_InputColor= GarageUtils.GetEnumOption<CarProperties.eColors>(i_input, CarProperties.k_ColorMinEnumValue, CarProperties.k_ColorMaxEnumValue);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
         }
 
         private void takeFuelMotorCycleInputParameter(int i, string i_input)
@@ -242,7 +473,7 @@ namespace Ex03.GarageLogic
                     m_InputEngineDisplacement = int.Parse(i_input);
                     break;
                 default:
-                    break;
+                    throw new IndexOutOfRangeException();
             }
         }
 
@@ -283,6 +514,48 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+        }
+        public Vehicle GetNewVehicle(VehicleCatalog.eVehicleCatalog i_Option)
+        {
+            Vehicle newVehicle = null;
+            List<Tire> tires;
+            switch (i_Option)
+            {
+                case VehicleCatalog.eVehicleCatalog.FuelMotorCycle:
+                    tires = createNewTiresList(MotorCycleProperties.k_NumberOfTires);
+                    newVehicle = new FuelMotorCycle(m_InputLicensePlate, m_InputModelName, tires, m_InputFuelType, m_InputMaxFuelCapacity, m_InputinitialFuel, m_InputLicenseType, m_InputEngineDisplacement);
+                    break;
+                case VehicleCatalog.eVehicleCatalog.FuelTruck:
+                    tires = createNewTiresList(TruckProperties.k_NumberOfTires);
+                    newVehicle = new FuelTruck(m_InputLicensePlate, m_InputModelName, tires, m_InputFuelType, m_InputMaxFuelCapacity, m_InputinitialFuel, m_InputIsCarryingDangerousMaterials, m_InputMaxCarryLoad);
+                    break;
+                case VehicleCatalog.eVehicleCatalog.FuelCar:
+                    tires = createNewTiresList(CarProperties.k_NumberOfTires);
+                    newVehicle = new FuelCar(m_InputLicensePlate, m_InputModelName, tires, m_InputFuelType, m_InputMaxFuelCapacity, m_InputinitialFuel, m_InputNumberOfDoors, m_InputColor);
+                    break;
+                case VehicleCatalog.eVehicleCatalog.ElectricCar:
+                    tires = createNewTiresList(CarProperties.k_NumberOfTires);
+                    newVehicle = new ElectricCar(m_InputLicensePlate, m_InputModelName, tires, m_InputMaxHoursOfPower, m_InputCurrentHoursOfPower, m_InputNumberOfDoors, m_InputColor);
+                    break;
+                case VehicleCatalog.eVehicleCatalog.ElectricMotorCycle:
+                    tires = createNewTiresList(MotorCycleProperties.k_NumberOfTires);
+                    newVehicle = new ElectricMotorCycle(m_InputLicensePlate, m_InputModelName, tires, m_InputMaxHoursOfPower, m_InputCurrentHoursOfPower, m_InputLicenseType, m_InputEngineDisplacement);
+                    break;
+                default:
+                    throw new IndexOutOfRangeException();
+            }
+
+            return newVehicle;
+        }
+
+        private List<Tire> createNewTiresList(int k_NumberOfTires)
+        {
+            List<Tire> tires = new List<Tire>(k_NumberOfTires);
+            for (int i = 0; i < k_NumberOfTires; ++i)
+            {
+                tires.Add(new Tire(m_InputManufacturerName, m_InputMaxAllowedAirPressure, m_InputStartingAirPressure));
+            }
+            return tires;
         }
     }
 }

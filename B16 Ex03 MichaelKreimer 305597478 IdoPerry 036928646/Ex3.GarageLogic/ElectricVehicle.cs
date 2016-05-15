@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
 {
     public class ElectricVehicle : Vehicle
     {
-        private const int k_MinValueAllowed = 0;
+        public const int k_MinValueAllowed = 0;
         private float m_CurrentHoursOfPower = 0;
         private readonly float r_MaxHoursOfPower;
 
