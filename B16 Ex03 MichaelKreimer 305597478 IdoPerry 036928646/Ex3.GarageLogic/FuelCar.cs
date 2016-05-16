@@ -19,4 +19,3 @@ namespace Ex03.GarageLogic.CarModels
         }
     }
 }
-

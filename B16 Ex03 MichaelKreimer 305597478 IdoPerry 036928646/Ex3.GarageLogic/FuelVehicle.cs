@@ -9,10 +9,9 @@ namespace Ex03.GarageLogic
     {
         public const int k_MinValueAllowed = 0;
         private const string k_InvalidArgumentMessage = "Entered fuel type of {0} does not match allowed fuel type of {1}.";
-
+        private readonly float r_MaxFuelTankCapacity;
         private readonly FuelTypes.eFuelType r_FuelType;
         private float m_CurrentFuelAmount;
-        private readonly float r_MaxFuelTankCapacity;
 
         public override string ToString()
         {
@@ -39,6 +38,7 @@ EnergyMeterPercentage);
             m_CurrentFuelAmount = 0;
             Refuel(i_InitalFuelAmount, i_FuelType);
         }
+
         public float CurrentFuelAmount
         {
             get
@@ -55,7 +55,7 @@ EnergyMeterPercentage);
             }
         }
 
-        public void Refuel(float i_FuelToAdd , FuelTypes.eFuelType i_FuelType)
+        public void Refuel(float i_FuelToAdd, FuelTypes.eFuelType i_FuelType)
         {
             if (i_FuelType == r_FuelType)
             {
@@ -72,15 +72,13 @@ EnergyMeterPercentage);
             }
             else
             {
-                throw new ArgumentException(string.Format(k_InvalidArgumentMessage, i_FuelType , r_FuelType));
+                throw new ArgumentException(string.Format(k_InvalidArgumentMessage, i_FuelType, r_FuelType));
             }
-
         }
+
         public float calcFuelLeftToMax()
         {
             return r_MaxFuelTankCapacity - m_CurrentFuelAmount;
         }
     }
 }
-
-

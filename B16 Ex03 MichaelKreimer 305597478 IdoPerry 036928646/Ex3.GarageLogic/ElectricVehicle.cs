@@ -6,10 +6,10 @@ namespace Ex03.GarageLogic
 {
     public class ElectricVehicle : Vehicle
     {
+        private readonly float r_MaxHoursOfPower;
         public const int k_MinValueAllowed = 0;
         private float m_CurrentHoursOfPower = 0;
-        private readonly float r_MaxHoursOfPower;
-
+        
         public float HoursOfPower
         {
             get
@@ -17,6 +17,7 @@ namespace Ex03.GarageLogic
                 return m_CurrentHoursOfPower;
             }
         }
+
         public override string ToString()
         {
             StringBuilder toString = new StringBuilder(base.ToString());

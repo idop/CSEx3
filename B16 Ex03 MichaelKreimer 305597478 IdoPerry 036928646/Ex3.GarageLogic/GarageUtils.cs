@@ -24,17 +24,18 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException(i_MinValue, i_MaxValue);
             }
+
             return floatInput;
         }
 
         private static bool FloatrInRange(float i_Input, float i_MinValue, float i_MaxValue)
         {
-            return (i_Input >= i_MinValue && i_Input <= i_MaxValue);
+            return i_Input >= i_MinValue && i_Input <= i_MaxValue;
         }
 
         private static bool IntegerInRange(int i_Input, int i_MinValue, int i_MaxValue)
         {
-            return (i_Input >= i_MinValue && i_Input <= i_MaxValue);
+            return i_Input >= i_MinValue && i_Input <= i_MaxValue;
         }
     }
 }

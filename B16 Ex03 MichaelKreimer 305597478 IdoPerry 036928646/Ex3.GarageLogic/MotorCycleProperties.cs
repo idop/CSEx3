@@ -9,6 +9,22 @@ namespace Ex03.GarageLogic.MotorCycleModels
         public const int k_LicenseTypeMinEnumValue = 0;
         public const int k_LicenseTypeMaxEnumValue = 3;
         public const int k_NumberOfTires = 2;
+
+        public static string GetLicenseTypeUiDisplay()
+        {
+            string licenseTypeUiDisplay = string.Format(
+@"{0} - A
+{1} - A1
+{2} - AB
+{3} - B1",
+(int)eLicenseType.A,
+(int)eLicenseType.A1,
+(int)eLicenseType.AB,
+(int)eLicenseType.B1);
+
+            return licenseTypeUiDisplay;
+        }
+
         public enum eLicenseType
         {
             A,
@@ -24,32 +40,15 @@ namespace Ex03.GarageLogic.MotorCycleModels
 Engine Displacement: {1}",
 m_LicenseType,
 m_EngineDisplacement);
-
         }
 
         private eLicenseType m_LicenseType;
         private int m_EngineDisplacement;
 
-
         public MotorCycleProperties(eLicenseType i_LicenseType, int i_EngineDisplacement)
         {
             m_LicenseType = i_LicenseType;
             m_EngineDisplacement = i_EngineDisplacement;
-        }
-
-        public static string GetLicenseTypeUiDisplay()
-        {
-            string licenseTypeUiDisplay = string.Format(
-@"{0} - A
-{1} - A1
-{2} - AB
-{3} - B1",
-(int)eLicenseType.A,
-(int)eLicenseType.A1,
-(int)eLicenseType.AB,
-(int)eLicenseType.B1);
-
-            return licenseTypeUiDisplay;
         }
     }
 }

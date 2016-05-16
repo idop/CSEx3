@@ -1,9 +1,9 @@
-﻿using Ex03.GarageLogic.MotorCycleModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Ex03.GarageLogic.TruckModels;
 using Ex03.GarageLogic.CarModels;
+using Ex03.GarageLogic.MotorCycleModels;
 
 namespace Ex03.GarageLogic
 {
@@ -22,29 +22,36 @@ namespace Ex03.GarageLogic
         private const string k_NumberOfDoorsDisplay = "Number Of Doors";
         private const string k_CarryingDangerousMaterialsDisplay = "Does the truck Carries Dangerous Materials? (True/False)";
         private const string k_MaxCarryLoadDisplay = "Max Carry Load";
-        private const string k_MaxHoursOfPowerDisplay= "Max Hours Of Power";
+        private const string k_MaxHoursOfPowerDisplay = "Max Hours Of Power";
         private const string k_CurrentHoursOfPowerDisplay = "Current Hours Of Power";
-        ///Vehicle Protperties
+        
+        ////Vehicle Protperties
         private string m_InputLicensePlate;
-        string m_InputModelName;
-        ///Tire Properties
-        string m_InputManufacturerName;
-        float m_InputMaxAllowedAirPressure;
-        float m_InputStartingAirPressure;
-        ///Fuel Vehicele Properties
-        FuelTypes.eFuelType m_InputFuelType;
-        float m_InputMaxFuelCapacity;
-        float m_InputinitialFuel;
-        ///Electric Vehicle Properties
+        private string m_InputModelName;
+
+        ////Tire Properties
+        private string m_InputManufacturerName;
+        private float m_InputMaxAllowedAirPressure;
+        private float m_InputStartingAirPressure;
+
+        ////Fuel Vehicele Properties
+        private FuelTypes.eFuelType m_InputFuelType;
+        private float m_InputMaxFuelCapacity;
+        private float m_InputinitialFuel;
+        
+        ////Electric Vehicle Properties
         private float m_InputMaxHoursOfPower;
         private float m_InputCurrentHoursOfPower;
-        ///MotorCycle Properties
-        MotorCycleProperties.eLicenseType m_InputLicenseType;
-        int m_InputEngineDisplacement;
-        ///Car Properties
+
+        ////MotorCycle Properties
+        private MotorCycleProperties.eLicenseType m_InputLicenseType;
+        private int m_InputEngineDisplacement;
+        
+        ////Car Properties
         private CarProperties.eNumberOfDoors m_InputNumberOfDoors;
         private CarProperties.eColors m_InputColor;
-        ///Truck Properties
+        
+        ////Truck Properties
         private bool m_InputIsCarryingDangerousMaterials;
         private float m_InputMaxCarryLoad;
 
@@ -79,7 +86,6 @@ namespace Ex03.GarageLogic
             }
 
             return numberOfInputParameters;
-
         }
 
         public string GetInputDisplayMessageForParameter(VehicleCatalog.eVehicleCatalog i_Option, int i)
@@ -134,6 +140,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -161,6 +168,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -207,6 +215,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -235,6 +244,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -263,6 +273,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -307,6 +318,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new IndexOutOfRangeException();
             }
+
             return inputDisplayMessage;
         }
 
@@ -384,7 +396,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         private void takeElectircVehicleInputParameter(int i, string i_input)
         {
             switch (i)
@@ -393,12 +404,13 @@ namespace Ex03.GarageLogic
                     m_InputMaxHoursOfPower = float.Parse(i_input);
                     break;
                 case 5:
-                    m_InputCurrentHoursOfPower=  GarageUtils.ParseFloatRangeInput(i_input, ElectricVehicle.k_MinValueAllowed, m_InputMaxHoursOfPower);
+                    m_InputCurrentHoursOfPower = GarageUtils.ParseFloatRangeInput(i_input, ElectricVehicle.k_MinValueAllowed, m_InputMaxHoursOfPower);
                     break;
                 default:
                     throw new IndexOutOfRangeException();
             }
         }
+
         private void takeFuelTruckInputParameter(int i, string i_input)
         {
             switch (i)
@@ -444,7 +456,7 @@ namespace Ex03.GarageLogic
                     m_InputNumberOfDoors = GarageUtils.GetEnumOption<CarProperties.eNumberOfDoors>(i_input, CarProperties.k_NumberOfDoorsMinEnumValue, CarProperties.k_NumberOfDoorsMaxEnumValue);
                     break;
                 case 8:
-                    m_InputColor= GarageUtils.GetEnumOption<CarProperties.eColors>(i_input, CarProperties.k_ColorMinEnumValue, CarProperties.k_ColorMaxEnumValue);
+                    m_InputColor = GarageUtils.GetEnumOption<CarProperties.eColors>(i_input, CarProperties.k_ColorMinEnumValue, CarProperties.k_ColorMaxEnumValue);
                     break;
                 default:
                     throw new IndexOutOfRangeException();
@@ -509,12 +521,13 @@ namespace Ex03.GarageLogic
                     m_InputMaxFuelCapacity = float.Parse(i_input);
                     break;
                 case 6:
-                    m_InputinitialFuel = GarageUtils.ParseFloatRangeInput(i_input, FuelVehicle.k_MinValueAllowed,m_InputMaxFuelCapacity);
+                    m_InputinitialFuel = GarageUtils.ParseFloatRangeInput(i_input, FuelVehicle.k_MinValueAllowed, m_InputMaxFuelCapacity);
                     break;
                 default:
                     throw new IndexOutOfRangeException();
             }
         }
+
         public Vehicle GetNewVehicle(VehicleCatalog.eVehicleCatalog i_Option)
         {
             Vehicle newVehicle = null;
@@ -555,6 +568,7 @@ namespace Ex03.GarageLogic
             {
                 tires.Add(new Tire(m_InputManufacturerName, m_InputMaxAllowedAirPressure, m_InputStartingAirPressure));
             }
+
             return tires;
         }
     }

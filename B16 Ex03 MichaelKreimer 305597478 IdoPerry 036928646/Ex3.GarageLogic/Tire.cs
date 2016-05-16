@@ -27,9 +27,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-
-        public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure,float i_StartingAirPressure)
+        public Tire(string i_ManufacturerName, float i_MaxAllowedAirPressure, float i_StartingAirPressure)
         {
             r_ManufacturerName = i_ManufacturerName;
             r_MaxAllowedAirPressure = i_MaxAllowedAirPressure;

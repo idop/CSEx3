@@ -8,6 +8,7 @@ namespace Ex03.GarageLogic
     {
         public const int k_MinEnumValue = 0;
         public const int k_MaxEnumValue = 4;
+
         public enum eVehicleCatalog
         {
             FuelMotorCycle,

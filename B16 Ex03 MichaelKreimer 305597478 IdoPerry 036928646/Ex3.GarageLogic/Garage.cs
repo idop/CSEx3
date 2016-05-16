@@ -8,29 +8,31 @@ namespace Ex03.GarageLogic
     {
         private Dictionary<string, Customer> m_Customers = new Dictionary<string, Customer>();
         private VehicleFactory m_Factory = new VehicleFactory();
+
         public void InsertCustomer(Customer i_Customer)
         {
             m_Customers.Add(i_Customer.CustomerVehicle.LicensePlate, i_Customer);
         }
+
         public bool IsVehicleAlreadyExists(string i_VehiclePlateNumber)
         {
             return m_Customers.ContainsKey(i_VehiclePlateNumber);
         }
+
         public List<string> DisplayVehiclesById(Customer.eVehicleStatus i_VehicleStatus)
         {
             List<string> listOfVehiclesPlates = new List<string>();
             foreach (Customer customer in m_Customers.Values)
             {
-
                 if (i_VehicleStatus.Equals(Customer.eVehicleStatus.All) || customer.Status.Equals(i_VehicleStatus))
                 {
                     listOfVehiclesPlates.Add(customer.CustomerVehicle.LicensePlate);
                 }
-                
             }
      
             return listOfVehiclesPlates;
         }
+
         public void ChangeVehicleStatus(string i_VehiclePlateNumber, Customer.eVehicleStatus i_NewVehicleStatus)
         {
             // notes : a) maybe change to private
@@ -43,6 +45,7 @@ namespace Ex03.GarageLogic
                 costumerToChange.Status = i_NewVehicleStatus;
             }
         }
+
         public void InflateVehicleTiresToMax(string i_VehiclePlateNumber)
         {
             Customer costumer;
@@ -56,6 +59,7 @@ namespace Ex03.GarageLogic
                 }
             }
         }
+
         public float addGasToVehicle(string i_VehiclePlateNumber, FuelTypes.eFuelType i_FuelType, string i_FuelToAdd)
         {
             float fuelAfterCharge = 0f;
@@ -81,6 +85,7 @@ namespace Ex03.GarageLogic
 
             return fuelAfterCharge;
         }
+
         public float ChargeElectricVehicle(string i_VehiclePlateNumber, string i_HoursForCharging)
         {
             float powerAfterCharing = 0f;
@@ -121,10 +126,11 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
+
             return vehicleData;
         }
 
-        public  int GetNumberOfInputParametersForSpecificVehicle(VehicleCatalog.eVehicleCatalog i_Option)
+        public int GetNumberOfInputParametersForSpecificVehicle(VehicleCatalog.eVehicleCatalog i_Option)
         {
             return m_Factory.GetNumberOfInputParametersForSpecificVehicle(i_Option);
         }

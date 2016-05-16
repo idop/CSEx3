@@ -6,8 +6,32 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string r_LicensePlate;
-        private string r_ModelName;
+        private readonly string r_LicensePlate;
+        private readonly string r_ModelName;
+
+        public static bool operator ==(Vehicle a, Vehicle b)
+        {
+            bool equals = false;
+            if (object.ReferenceEquals(a, b))
+            {
+                equals = true;
+            }
+            else if (((object)a == null) || ((object)b == null))
+            {
+                equals = false;
+            }
+            else
+            {
+                equals = a.LicensePlate == b.LicensePlate;
+            }
+
+            return equals;
+        }
+
+        public static bool operator !=(Vehicle a, Vehicle b)
+        {
+            return !(a == b);
+        }
 
         public override string ToString()
         {
@@ -72,17 +96,13 @@ r_LicensePlate);
             return r_LicensePlate.GetHashCode();
         }
 
-        public Vehicle ()
-        {
-
-        }
-
-        public Vehicle (string i_LicensePlate, string i_ModelName,  List<Tire> i_Tiers)
+        public Vehicle(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers)
         {
             r_LicensePlate = i_LicensePlate;
             r_ModelName = i_ModelName;
             m_Tiers = i_Tiers;
         }
+
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -95,30 +115,5 @@ r_LicensePlate);
 
             return equals;
         }
-
-        public static bool operator ==(Vehicle a , Vehicle b)
-        {
-            bool equals = false;
-            if (object.ReferenceEquals(a, b))
-            {
-                equals= true;
-            }
-            else if (((object)a == null) || ((object)b == null))
-            {
-                equals = false;
-            }
-            else
-            {
-                equals = a.LicensePlate == b.LicensePlate;
-            }
-
-            return equals;
-        }
-
-        public static bool operator !=(Vehicle a, Vehicle b)
-        {
-            return !(a == b);
-        }
-
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Ex03.ConsoleUi.Menus
 {
-
     public class MainMenu
     {
         public const int k_MinEnumValue = 0;
         public const int k_MaxEnumValue = 7;
+
         public enum eMainMenu
         {
             EnterNewVehicle,

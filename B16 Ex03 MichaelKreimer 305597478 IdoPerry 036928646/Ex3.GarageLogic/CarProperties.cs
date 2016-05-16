@@ -12,56 +12,6 @@ namespace Ex03.GarageLogic.CarModels
         public const int k_ColorMaxEnumValue = 3;
         public const int k_NumberOfTires = 4;
 
-        public override string ToString()
-        {
-            return string.Format(
-@"Color: {0}
-Number of Doors: {1}",
-m_Color,
-(int)m_NumberOfDoors);
-        }
-
-        public enum eColors
-        {
-            Yellow,
-            White,
-            Red,
-            Black
-        }
-
-        public enum eNumberOfDoors
-        {
-            TwoDoors = 2,
-            ThreeDoors = 3,
-            FourDoors = 4,
-            FiveDoors = 5
-        }
-
-        private eNumberOfDoors m_NumberOfDoors;
-        private eColors m_Color;
-
-        public CarProperties(eNumberOfDoors i_NumberOfDoors ,eColors i_Color)
-        {
-            m_NumberOfDoors = i_NumberOfDoors;
-            m_Color = i_Color;
-        }
-
-        public eNumberOfDoors NumberOfDoors
-        {
-            get
-            {
-                return m_NumberOfDoors;
-            }
-        }
-
-        public eColors Color
-        {
-            get
-            {
-                return m_Color;
-            }
-        }
-
         public static string GetColorsUiDisplay()
         {
             string colorUiDisplay = string.Format(
@@ -90,6 +40,56 @@ m_Color,
 (int)eNumberOfDoors.FiveDoors);
 
             return numberOfDoorsUiDisplay;
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+@"Color: {0}
+Number of Doors: {1}",
+m_Color,
+(int)m_NumberOfDoors);
+        }
+
+        public enum eColors
+        {
+            Yellow,
+            White,
+            Red,
+            Black
+        }
+
+        public enum eNumberOfDoors
+        {
+            TwoDoors = 2,
+            ThreeDoors = 3,
+            FourDoors = 4,
+            FiveDoors = 5
+        }
+
+        private eNumberOfDoors m_NumberOfDoors;
+        private eColors m_Color;
+
+        public CarProperties(eNumberOfDoors i_NumberOfDoors, eColors i_Color)
+        {
+            m_NumberOfDoors = i_NumberOfDoors;
+            m_Color = i_Color;
+        }
+
+        public eNumberOfDoors NumberOfDoors
+        {
+            get
+            {
+                return m_NumberOfDoors;
+            }
+        }
+
+        public eColors Color
+        {
+            get
+            {
+                return m_Color;
+            }
         }
     }
 }

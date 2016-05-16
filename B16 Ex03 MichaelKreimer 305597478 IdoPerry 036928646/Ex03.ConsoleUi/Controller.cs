@@ -1,19 +1,18 @@
-﻿using Ex03.GarageLogic;
-using System;
-using Ex03.ConsoleUi.Menus;
+﻿using System;
 using System.Collections.Generic;
+using Ex03.GarageLogic;
+using Ex03.ConsoleUi.Menus;
 
 namespace Ex03.ConsoleUi
 {
-    class Controller
+    public class Controller
     {
+        private const string k_InvalidMessage = "Invalid Input {0} Please try again.";
+        private const string k_ReturnToMainMenuMessage = "press any key to return to the main menu.";
         private const int v_NumOfMenuOptions = 8;
         private Garage m_Garage = new Garage();
         private bool m_UserWantsToUseProgram = true;
-        private const string k_InvalidMessage = "Invalid Input {0} Please try again.";
-        private const string k_ReturnToMainMenuMessage = "press any key to return to the main menu.";
-
-
+    
         public Controller()
         {
             ControlMainMenu();
@@ -73,8 +72,6 @@ namespace Ex03.ConsoleUi
                     throw new ValueOutOfRangeException(MainMenu.k_MinEnumValue, MainMenu.k_MaxEnumValue);
             }
         }
-
-
 
         private void printFullVehicleDetails()
         {
@@ -158,7 +155,7 @@ namespace Ex03.ConsoleUi
             string licensePlate = getLicensePlateNumberFromUser();
             if (m_Garage.IsVehicleAlreadyExists(licensePlate))
             {
-                m_Garage.ChangeVehicleStatus(licensePlate , Customer.eVehicleStatus.InRepair);
+                m_Garage.ChangeVehicleStatus(licensePlate, Customer.eVehicleStatus.InRepair);
             }
             else
             {
@@ -168,7 +165,6 @@ namespace Ex03.ConsoleUi
                 UI.PrintMessage(k_ReturnToMainMenuMessage);
                 UI.GetInput();
             }
-            
         }
 
         private Customer getCustomerInput(string i_LicensePlate) // TODO GET VEHICLE INP
@@ -180,7 +176,7 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(msg);
             string phoneNumber = UI.GetInput();
             Vehicle vehicle = getVehicleInput(i_LicensePlate);
-            return new Customer(name, phoneNumber, Customer.eVehicleStatus.InRepair , vehicle);
+            return new Customer(name, phoneNumber, Customer.eVehicleStatus.InRepair, vehicle);
         }
 
         private Vehicle getVehicleInput(string i_LicensePlate)
@@ -190,7 +186,7 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(msg);
             UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
             string input = UI.GetInput();
-            VehicleCatalog.eVehicleCatalog option = GarageUtils.GetEnumOption<VehicleCatalog.eVehicleCatalog>(input, VehicleCatalog.k_MinEnumValue , VehicleCatalog.k_MaxEnumValue);
+            VehicleCatalog.eVehicleCatalog option = GarageUtils.GetEnumOption<VehicleCatalog.eVehicleCatalog>(input, VehicleCatalog.k_MinEnumValue, VehicleCatalog.k_MaxEnumValue);
             return createSpecificVehicleFromOption(i_LicensePlate, option);
         }
 
@@ -204,7 +200,7 @@ namespace Ex03.ConsoleUi
                 invalidInput = true;
                 while (invalidInput)
                 {
-                    UI.PrintMessage("Please Enter " +m_Garage.GetInputDisplayMessageForParameter(i_Option, i));
+                    UI.PrintMessage("Please Enter " + m_Garage.GetInputDisplayMessageForParameter(i_Option, i));
                     try
                     {
                         m_Garage.TakeInputForParameter(i_Option, i, UI.GetInput());
@@ -224,6 +220,7 @@ namespace Ex03.ConsoleUi
                     }
                 }
             }
+
             return m_Garage.GetNewVehicle(i_Option);
         }
 
@@ -266,6 +263,7 @@ namespace Ex03.ConsoleUi
             Customer.eVehicleStatus vehicleStatus = GarageUtils.GetEnumOption<Customer.eVehicleStatus>(input, 0, 2);
             m_Garage.ChangeVehicleStatus(plateNumber, vehicleStatus);
         }
+
         private void inflateVehicleTiresToMax()
         {
             m_Garage.InflateVehicleTiresToMax(getLicensePlateNumberFromUser());
@@ -280,7 +278,5 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(msg);
             return UI.GetInput();
         }
-
-
     }
 }

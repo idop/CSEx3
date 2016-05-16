@@ -1,11 +1,8 @@
-﻿using Ex03.GarageLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ex03.GarageLogic.CarModels
 {
-
     public class ElectricCar : ElectricVehicle
     {
         private CarProperties m_CarProperties;
