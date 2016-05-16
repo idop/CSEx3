@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         {
             return m_Customers.ContainsKey(i_VehiclePlateNumber);
         }
-        public List<string> DisplayVehiclesById(string i_VehicleId, Customer.eVehicleStatus i_VehicleStatus)
+        public List<string> DisplayVehiclesById(Customer.eVehicleStatus i_VehicleStatus)
         {
             List<string> listOfVehiclesPlates = new List<string>();
             foreach (Customer customer in m_Customers.Values)

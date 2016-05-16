@@ -1,10 +1,12 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using Ex03.ConsoleUi.Menus;
+using System.Collections.Generic;
+
 namespace Ex03.ConsoleUi
 {
     class Controller
-    {// here is the logic manager of the garage
+    {
         private const int v_NumOfMenuOptions = 8;
         private Garage m_Garage = new Garage();
         private bool m_UserWantsToUseProgram = true;
@@ -123,10 +125,10 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(VehicleCatalog.GetVehicleCatalogUiDisplay());
             string input = UI.GetInput();
             VehicleCatalog.eVehicleCatalog option = GarageUtils.GetEnumOption<VehicleCatalog.eVehicleCatalog>(input, VehicleCatalog.k_MinEnumValue , VehicleCatalog.k_MaxEnumValue);
-            return createSpcificVehicleFromOption(i_LicensePlate, option);
+            return createSpecificVehicleFromOption(i_LicensePlate, option);
         }
 
-        private Vehicle createSpcificVehicleFromOption(string i_LicensePlate, VehicleCatalog.eVehicleCatalog i_Option)
+        private Vehicle createSpecificVehicleFromOption(string i_LicensePlate, VehicleCatalog.eVehicleCatalog i_Option)
         {
             int numberOfInputParameters = m_Garage.GetNumberOfInputParametersForSpecificVehicle(i_Option);
             bool invalidInput;
@@ -136,7 +138,7 @@ namespace Ex03.ConsoleUi
                 invalidInput = true;
                 while (invalidInput)
                 {
-                    UI.PrintMessage("Please Eneter " +m_Garage.GetInputDisplayMessageForParameter(i_Option, i));
+                    UI.PrintMessage("Please Enter " +m_Garage.GetInputDisplayMessageForParameter(i_Option, i));
                     try
                     {
                         m_Garage.TakeInputForParameter(i_Option, i, UI.GetInput());
@@ -161,6 +163,23 @@ namespace Ex03.ConsoleUi
 
         private void showFindVehicleByLicencePlateSubMenu()
         {
+            Customer.eVehicleStatus vehicleStatus = getVehicleStatusFromUser();
+            List<string> vehiclesPlateNumbers = m_Garage.DisplayVehiclesById(vehicleStatus);
+            UI.PrintStringsList(vehiclesPlateNumbers);
+        }
+
+        private Customer.eVehicleStatus getVehicleStatusFromUser()
+        {
+            //TODO: finish coding the function
+            string msg = String.Format(
+@"What cars would you like to display?
+0 - In repair
+1 - Repaired
+2 - Paid
+3 - All
+");
+            UI.PrintMessage(msg);
+                Customer.eVehicleStatus vehicleStatus = (Customer.eVehicleStatus)UI.GetIntegerFromUser(0, 3);
             throw new NotImplementedException();
         }
 

@@ -9,6 +9,7 @@
 
         public enum eVehicleStatus
         {
+            //TODO: consider to move to vehicle class..
             InRepair,
             Repaired,
             Paid,

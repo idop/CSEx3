@@ -17,24 +17,24 @@ namespace Ex03.GarageLogic
             return (T)Enum.ToObject(typeof(T), intInput);
         }
 
-        public static float ParseFloatRangeInput(string i_Input, float i_MinValue, float i_maxValue)
+        public static float ParseFloatRangeInput(string i_Input, float i_MinValue, float i_MaxValue)
         {
             float floatInput = float.Parse(i_Input);
-            if (!FloatrInRange(floatInput, i_MinValue, i_maxValue))
+            if (!FloatrInRange(floatInput, i_MinValue, i_MaxValue))
             {
-                throw new ValueOutOfRangeException(i_MinValue, i_maxValue);
+                throw new ValueOutOfRangeException(i_MinValue, i_MaxValue);
             }
             return floatInput;
         }
 
-        private static bool FloatrInRange(float i_Input, float i_MinValue, float i_maxValue)
+        private static bool FloatrInRange(float i_Input, float i_MinValue, float i_MaxValue)
         {
-            return (i_Input >= i_MinValue && i_Input <= i_maxValue);
+            return (i_Input >= i_MinValue && i_Input <= i_MaxValue);
         }
 
-        private static bool IntegerInRange(int i_Input, int i_MinValue, int i_maxValue)
+        private static bool IntegerInRange(int i_Input, int i_MinValue, int i_MaxValue)
         {
-            return (i_Input >= i_MinValue && i_Input <= i_maxValue);
+            return (i_Input >= i_MinValue && i_Input <= i_MaxValue);
         }
     }
 }
