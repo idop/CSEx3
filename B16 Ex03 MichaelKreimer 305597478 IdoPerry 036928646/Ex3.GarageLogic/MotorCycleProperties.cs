@@ -17,6 +17,16 @@ namespace Ex03.GarageLogic.MotorCycleModels
             B1
         }
 
+        public override string ToString()
+        {
+            return string.Format(
+@"License Type: {0}
+Engine Displacement: {1}",
+m_LicenseType,
+m_EngineDisplacement);
+
+        }
+
         private eLicenseType m_LicenseType;
         private int m_EngineDisplacement;
 

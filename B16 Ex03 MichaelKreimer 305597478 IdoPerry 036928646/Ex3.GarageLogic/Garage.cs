@@ -56,9 +56,9 @@ namespace Ex03.GarageLogic
                 }
             }
         }
-        public void addGasToVehicle(string i_VehiclePlateNumber, FuelTypes.eFuelType i_FuelType, float i_FuelToAdd)
+        public float addGasToVehicle(string i_VehiclePlateNumber, FuelTypes.eFuelType i_FuelType, string i_FuelToAdd)
         {
-            // note: * add range exception
+            float fuelAfterCharge = 0f;
             Customer costumer;
             bool carExists;
             carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
@@ -66,7 +66,8 @@ namespace Ex03.GarageLogic
             {
                 if (costumer.CustomerVehicle is FuelVehicle)
                 {
-                    ((FuelVehicle)costumer.CustomerVehicle).Refuel(i_FuelToAdd, i_FuelType);
+                    ((FuelVehicle)costumer.CustomerVehicle).Refuel(float.Parse(i_FuelToAdd), i_FuelType);
+                    fuelAfterCharge = ((FuelVehicle)costumer.CustomerVehicle).CurrentFuelAmount;
                 }
                 else
                 {
@@ -77,10 +78,12 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
+
+            return fuelAfterCharge;
         }
-        public void ChargeElectricVehicle(string i_VehiclePlateNumber, float i_MinutesForCharging)
+        public float ChargeElectricVehicle(string i_VehiclePlateNumber, string i_HoursForCharging)
         {
-            // note: * add range exception
+            float powerAfterCharing = 0f;
             Customer costumer;
             bool carExists;
             carExists = m_Customers.TryGetValue(i_VehiclePlateNumber, out costumer);
@@ -88,17 +91,20 @@ namespace Ex03.GarageLogic
             {
                 if (costumer.CustomerVehicle is ElectricVehicle)
                 {
-                    ((ElectricVehicle)costumer.CustomerVehicle).Charge(i_MinutesForCharging);
+                    ((ElectricVehicle)costumer.CustomerVehicle).Charge(float.Parse(i_HoursForCharging));
+                    powerAfterCharing = ((ElectricVehicle)costumer.CustomerVehicle).HoursOfPower;
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format("Vehicle with license Plate {0} does not run on Electricity", i_VehiclePlateNumber));
+                    throw new ArgumentException(string.Format("Vehicle with license Plate {0} does not run on Battery", i_VehiclePlateNumber));
                 }
             }
             else
             {
                 throw new ArgumentException(string.Format("could not find Vehicle with license Plate {0} ", i_VehiclePlateNumber));
             }
+
+            return powerAfterCharing;
         }
     
         public string GetVehicleData(string i_VehiclePlateNumber)

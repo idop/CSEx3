@@ -10,8 +10,10 @@ namespace Ex03.ConsoleUi
         private const int v_NumOfMenuOptions = 8;
         private Garage m_Garage = new Garage();
         private bool m_UserWantsToUseProgram = true;
-        private const string k_InvalidMsg = "Invalid Input {0} Please try again";
-       
+        private const string k_InvalidMessage = "Invalid Input {0} Please try again.";
+        private const string k_ReturnToMainMenuMessage = "press any key to return to the main menu.";
+
+
         public Controller()
         {
             ControlMainMenu();
@@ -33,7 +35,7 @@ namespace Ex03.ConsoleUi
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                    UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
                 }
             }
         }
@@ -78,14 +80,77 @@ namespace Ex03.ConsoleUi
         {
             string msg = m_Garage.GetVehicleData(getLicensePlateNumberFromUser());
             UI.PrintMessage(msg);
+            UI.PrintMessage(k_ReturnToMainMenuMessage);
+            UI.GetInput();
+        }
 
+        private void fillFuelToVehicle() // hnadle Exceptions
+        {
+            float fuelAfterCharging = 0f;
+            string plateNumber = getLicensePlateNumberFromUser();
+            UI.PrintMessage("Please Select the fuel Type");
+            UI.PrintMessage(FuelTypes.GetFuelTypesUiDisplay());
+            string input = UI.GetInput();
+            FuelTypes.eFuelType fuelType = GarageUtils.GetEnumOption<FuelTypes.eFuelType>(input, FuelTypes.k_MinEnumValue, FuelTypes.k_MaxEnumValue);
+
+            UI.PrintMessage("Please enter the amount of hours you wish to charge the vehicle");
+            input = UI.GetInput();
+
+            try
+            {
+                fuelAfterCharging = m_Garage.addGasToVehicle(plateNumber, fuelType, input);
+                UI.PrintMessage(string.Format("Vehicle fuel tank was fuuled with {0:f}. Current Fuel in the fuel tank is {1:f} liters", input, fuelAfterCharging));
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            catch (FormatException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            catch (ArgumentException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            finally
+            {
+                UI.PrintMessage(k_ReturnToMainMenuMessage);
+                UI.GetInput();
+            }
         }
 
         private void chargeVehicle()
         {
             string plateNumber = getLicensePlateNumberFromUser();
-            float minutesToCharage = UI.GetFloatFromUser(0, float.MaxValue - 1);
-            m_Garage.ChargeElectricVehicle(plateNumber, minutesToCharage);
+            string input;
+            float powerAfterCharging = 0f;
+
+            UI.PrintMessage("Please enter the amount of hours you wish to charge the vehicle");
+            input = UI.GetInput();
+            
+            try
+            {
+                powerAfterCharging = m_Garage.ChargeElectricVehicle(plateNumber, input);
+                UI.PrintMessage(string.Format("Vehicle Battery was charged with {0:f} hours. Current power is {1:f} hours", input, powerAfterCharging));
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            catch (FormatException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            catch (ArgumentException ex)
+            {
+                UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
+            }
+            finally
+            {
+                UI.PrintMessage(k_ReturnToMainMenuMessage);
+                UI.GetInput();
+            }
         }
 
         private void enterNewVehicle()
@@ -99,7 +164,8 @@ namespace Ex03.ConsoleUi
             {
                 Customer costumer = getCustomerInput(licensePlate);
                 m_Garage.InsertCustomer(costumer);
-                UI.PrintMessage("New customer vehicle added succesfully. press any key to return to the main menu");
+                UI.PrintMessage("New customer vehicle added succesfully.");
+                UI.PrintMessage(k_ReturnToMainMenuMessage);
                 UI.GetInput();
             }
             
@@ -133,7 +199,7 @@ namespace Ex03.ConsoleUi
             int numberOfInputParameters = m_Garage.GetNumberOfInputParametersForSpecificVehicle(i_Option);
             bool invalidInput;
             m_Garage.StartNewVehicleInputSequence(i_LicensePlate);
-            for (int i = 0; i < numberOfInputParameters; ++i)
+            for (int i = 0; i <= numberOfInputParameters; ++i)
             {
                 invalidInput = true;
                 while (invalidInput)
@@ -146,15 +212,15 @@ namespace Ex03.ConsoleUi
                     }
                     catch (ValueOutOfRangeException ex)
                     {
-                        UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                        UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
                     }
                     catch (FormatException ex)
                     {
-                        UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                        UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
                     }
                     catch (ArgumentException ex)
                     {
-                        UI.PrintMessage(string.Format(k_InvalidMsg, ex.Message));
+                        UI.PrintMessage(string.Format(k_InvalidMessage, ex.Message));
                     }
                 }
             }
@@ -171,6 +237,7 @@ namespace Ex03.ConsoleUi
         private Customer.eVehicleStatus getVehicleStatusFromUser()
         {
             //TODO: finish coding the function
+            string input;
             string msg = String.Format(
 @"What cars would you like to display?
 0 - In repair
@@ -179,13 +246,15 @@ namespace Ex03.ConsoleUi
 3 - All
 ");
             UI.PrintMessage(msg);
-                Customer.eVehicleStatus vehicleStatus = (Customer.eVehicleStatus)UI.GetIntegerFromUser(0, 3);
+            input = UI.GetInput();
+            Customer.eVehicleStatus vehicleStatus = GarageUtils.GetEnumOption<Customer.eVehicleStatus>(input, 0, 3);
             throw new NotImplementedException();
         }
 
         private void changeVehicleStatus()
         {
             string plateNumber = getLicensePlateNumberFromUser();
+            string input;
             string msg = String.Format(
 @"What is the new status of the car?
 0 - In repair
@@ -193,23 +262,18 @@ namespace Ex03.ConsoleUi
 2 - Paid
 ");
             UI.PrintMessage(msg);
-            Customer.eVehicleStatus vehicleStatus = (Customer.eVehicleStatus)UI.GetIntegerFromUser(0, 2);
+            input = UI.GetInput();
+            Customer.eVehicleStatus vehicleStatus = GarageUtils.GetEnumOption<Customer.eVehicleStatus>(input, 0, 2);
             m_Garage.ChangeVehicleStatus(plateNumber, vehicleStatus);
         }
         private void inflateVehicleTiresToMax()
         {
             m_Garage.InflateVehicleTiresToMax(getLicensePlateNumberFromUser());
+            UI.PrintMessage("Vehicle Tires were inflated to the maxmium allowed by the tire manufacturer");
+            UI.PrintMessage(k_ReturnToMainMenuMessage);
+            UI.GetInput();
         }
-        private void fillFuelToVehicle() // hnadle Exceptions
-        {
-            string plateNumber = getLicensePlateNumberFromUser();
-            UI.PrintMessage("Please Select the fuel Type");
-            UI.PrintMessage(FuelTypes.GetFuelTypesUiDisplay());
-            string input = UI.GetInput();
-            FuelTypes.eFuelType fuelType = GarageUtils.GetEnumOption<FuelTypes.eFuelType>(input, FuelTypes.k_MinEnumValue, FuelTypes.k_MaxEnumValue);
-            float fuelToFill = float.Parse(UI.GetInput());
-            m_Garage.addGasToVehicle(plateNumber, fuelType, fuelToFill);
-        }
+
         private string getLicensePlateNumberFromUser()
         {
             string msg = "Please enter the license plate number: ";

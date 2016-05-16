@@ -11,12 +11,6 @@ namespace Ex03.ConsoleUi
             Console.WriteLine(Menus.MainMenu.GetMainMenuUiDisplay());
         }
 
-        internal static int GetIntegerFromUser(int i_MinRange, int i_MaxRange)
-        {
-
-            throw new NotImplementedException();
-        }
-
         internal static void ClearConsle()
         {
             Console.Clear();
@@ -30,12 +24,6 @@ namespace Ex03.ConsoleUi
         internal static string GetInput()
         {
             return Console.ReadLine();
-        }
-
-
-        internal static float GetFloatFromUser(int v1, float v2)
-        {
-            throw new NotImplementedException();
         }
 
         internal static void PrintStringsList(List<string> i_VehiclesPlateNumbers)

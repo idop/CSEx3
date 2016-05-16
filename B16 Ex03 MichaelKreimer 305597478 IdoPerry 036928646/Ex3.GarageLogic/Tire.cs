@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
         public void AddAirPressure(float i_AirToAdd)
         {
             float newAirPressure = i_AirToAdd + m_CurrentAirPressure;
-            if (newAirPressure < r_MaxAllowedAirPressure)
+            if (newAirPressure <= r_MaxAllowedAirPressure)
             {
                 m_CurrentAirPressure = newAirPressure;
             }
@@ -61,5 +61,17 @@ namespace Ex03.GarageLogic
             return r_MaxAllowedAirPressure - m_CurrentAirPressure;
         }
 
+        public override string ToString()
+        {
+            string toString = string.Format(
+@"Manufactorer name: {0}
+Current air pressure: {1}
+Maximum allowed air pressure: {2}",
+r_ManufacturerName,
+m_CurrentAirPressure,
+r_MaxAllowedAirPressure);
+
+            return toString;
+        }
     }
 }

@@ -6,18 +6,33 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_LicensePlate;
-        private string m_ModelName;
+        private string r_LicensePlate;
+        private string r_ModelName;
+
+        public override string ToString()
+        {
+            int tireIndex = 0;
+            StringBuilder toString = new StringBuilder();
+            toString.AppendFormat(
+@"Model Name: {0}
+License Plate: {1}",
+r_ModelName,
+r_LicensePlate);
+
+            foreach (Tire tire in m_Tiers)
+            {
+                toString.AppendFormat("{0} Tire {1} informaiton:", Environment.NewLine, ++tireIndex);
+                toString.Append(tire.ToString());
+            }
+
+            return toString.ToString();
+        }
 
         public string ModelName
         {
             get
             {
-                return m_ModelName;
-            }
-            set
-            {
-                m_ModelName = value;
+                return r_ModelName;
             }
         }
 
@@ -25,11 +40,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_LicensePlate;
-            }
-            set
-            {
-                m_LicensePlate = value;
+                return r_LicensePlate;
             }
         }
 
@@ -58,7 +69,7 @@ namespace Ex03.GarageLogic
 
         public override int GetHashCode()
         {
-            return m_LicensePlate.GetHashCode();
+            return r_LicensePlate.GetHashCode();
         }
 
         public Vehicle ()
@@ -68,8 +79,8 @@ namespace Ex03.GarageLogic
 
         public Vehicle (string i_LicensePlate, string i_ModelName,  List<Tire> i_Tiers)
         {
-            m_LicensePlate = i_LicensePlate;
-            m_ModelName = i_ModelName;
+            r_LicensePlate = i_LicensePlate;
+            r_ModelName = i_ModelName;
             m_Tiers = i_Tiers;
         }
         public override bool Equals(object obj)
@@ -79,7 +90,7 @@ namespace Ex03.GarageLogic
 
             if (vehicleToCompereTo != null)
             {
-                equals = this.m_LicensePlate == vehicleToCompereTo.LicensePlate;
+                equals = this.r_LicensePlate == vehicleToCompereTo.LicensePlate;
             }
 
             return equals;
@@ -88,7 +99,7 @@ namespace Ex03.GarageLogic
         public static bool operator ==(Vehicle a , Vehicle b)
         {
             bool equals = false;
-            if (System.Object.ReferenceEquals(a, b))
+            if (object.ReferenceEquals(a, b))
             {
                 equals= true;
             }

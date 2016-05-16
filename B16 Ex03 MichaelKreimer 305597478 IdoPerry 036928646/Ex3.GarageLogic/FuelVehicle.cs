@@ -14,6 +14,23 @@ namespace Ex03.GarageLogic
         private float m_CurrentFuelAmount;
         private readonly float r_MaxFuelTankCapacity;
 
+        public override string ToString()
+        {
+            StringBuilder toString = new StringBuilder(base.ToString());
+            toString.Append(Environment.NewLine);
+            toString.AppendFormat(
+@"Fuel Type: {0}
+Current fuel Amount: {1}
+Maximum fuel tank capcity: {2}
+Power Precentage {3:P1}",
+r_FuelType,
+m_CurrentFuelAmount,
+r_MaxFuelTankCapacity,
+EnergyMeterPercentage);
+
+            return toString.ToString();
+        }
+
         public FuelVehicle(string i_LicensePlate, string i_ModelName, List<Tire> i_Tiers, FuelTypes.eFuelType i_FuelType, float i_MaxFuelTankCapacity, float i_InitalFuelAmount) 
             : base(i_LicensePlate, i_ModelName, i_Tiers)
         {
@@ -27,10 +44,6 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_CurrentFuelAmount;
-            }
-            set
-            {
-                m_CurrentFuelAmount = value;
             }
         }
 
@@ -47,7 +60,7 @@ namespace Ex03.GarageLogic
             if (i_FuelType == r_FuelType)
             {
                 float newFuelAmount = i_FuelToAdd + m_CurrentFuelAmount;
-                if(newFuelAmount < r_MaxFuelTankCapacity)
+                if(newFuelAmount <= r_MaxFuelTankCapacity)
                 {
                     m_CurrentFuelAmount = newFuelAmount;
                 }

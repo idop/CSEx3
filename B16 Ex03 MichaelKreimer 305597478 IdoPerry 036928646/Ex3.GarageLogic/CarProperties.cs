@@ -11,6 +11,16 @@ namespace Ex03.GarageLogic.CarModels
         public const int k_ColorMinEnumValue = 0;
         public const int k_ColorMaxEnumValue = 3;
         public const int k_NumberOfTires = 4;
+
+        public override string ToString()
+        {
+            return string.Format(
+@"Color: {0}
+Number of Doors: {1}",
+m_Color,
+(int)m_NumberOfDoors);
+        }
+
         public enum eColors
         {
             Yellow,
