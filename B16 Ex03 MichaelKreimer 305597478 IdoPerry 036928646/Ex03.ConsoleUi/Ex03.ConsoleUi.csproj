@@ -40,7 +40,6 @@
   <ItemGroup>
     <Compile Include="MainMenu.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="FindVehicleSubMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="UI.cs" />
   </ItemGroup>

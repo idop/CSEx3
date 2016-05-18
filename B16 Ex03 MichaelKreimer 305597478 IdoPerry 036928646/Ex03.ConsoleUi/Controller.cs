@@ -227,13 +227,14 @@ namespace Ex03.ConsoleUi
         private void showFindVehicleByLicencePlateSubMenu()
         {
             Customer.eVehicleStatus vehicleStatus = getVehicleStatusFromUser();
-            List<string> vehiclesPlateNumbers = m_Garage.DisplayVehiclesById(vehicleStatus);
+            List<string> vehiclesPlateNumbers = m_Garage.DisplyVehiclesByStatus(vehicleStatus);
             UI.PrintStringsList(vehiclesPlateNumbers);
+            UI.PrintMessage(k_ReturnToMainMenuMessage);
+            UI.GetInput();
         }
 
         private Customer.eVehicleStatus getVehicleStatusFromUser()
         {
-            //TODO: finish coding the function
             string input;
             string msg = String.Format(
 @"What cars would you like to display?
@@ -245,7 +246,7 @@ namespace Ex03.ConsoleUi
             UI.PrintMessage(msg);
             input = UI.GetInput();
             Customer.eVehicleStatus vehicleStatus = GarageUtils.GetEnumOption<Customer.eVehicleStatus>(input, 0, 3);
-            throw new NotImplementedException();
+            return vehicleStatus;
         }
 
         private void changeVehicleStatus()
