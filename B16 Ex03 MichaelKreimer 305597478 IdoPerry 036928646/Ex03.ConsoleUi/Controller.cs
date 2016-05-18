@@ -81,7 +81,7 @@ namespace Ex03.ConsoleUi
             UI.GetInput();
         }
 
-        private void fillFuelToVehicle() // hnadle Exceptions
+        private void fillFuelToVehicle()
         {
             float fuelAfterCharging = 0f;
             string plateNumber = getLicensePlateNumberFromUser();
@@ -167,7 +167,7 @@ namespace Ex03.ConsoleUi
             }
         }
 
-        private Customer getCustomerInput(string i_LicensePlate) // TODO GET VEHICLE INP
+        private Customer getCustomerInput(string i_LicensePlate)
         {
             string msg = "Please enter the costumer name: ";
             UI.PrintMessage(msg);
@@ -228,7 +228,10 @@ namespace Ex03.ConsoleUi
         {
             Customer.eVehicleStatus vehicleStatus = getVehicleStatusFromUser();
             List<string> vehiclesPlateNumbers = m_Garage.DisplyVehiclesByStatus(vehicleStatus);
-            UI.PrintStringsList(vehiclesPlateNumbers);
+            foreach (string plateNumbr in vehiclesPlateNumbers)
+            {
+                UI.PrintMessage(plateNumbr);
+            }
             UI.PrintMessage(k_ReturnToMainMenuMessage);
             UI.GetInput();
         }

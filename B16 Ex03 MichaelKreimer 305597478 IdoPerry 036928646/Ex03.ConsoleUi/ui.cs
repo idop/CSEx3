@@ -25,13 +25,5 @@ namespace Ex03.ConsoleUi
         {
             return Console.ReadLine();
         }
-
-        internal static void PrintStringsList(List<string> i_VehiclesPlateNumbers)
-        {
-            foreach (string vehiclePlateNumber in i_VehiclesPlateNumbers)
-            {
-                Console.WriteLine(vehiclePlateNumber);
-            }
-        }
     }
 }
