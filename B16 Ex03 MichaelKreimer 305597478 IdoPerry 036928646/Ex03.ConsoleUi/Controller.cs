@@ -236,7 +236,7 @@ namespace Ex03.ConsoleUi
         private Customer.eVehicleStatus getVehicleStatusFromUser()
         {
             string input;
-            string msg = String.Format(
+            string msg = string.Format(
 @"What cars would you like to display?
 0 - In repair
 1 - Repaired
@@ -253,7 +253,7 @@ namespace Ex03.ConsoleUi
         {
             string plateNumber = getLicensePlateNumberFromUser();
             string input;
-            string msg = String.Format(
+            string msg = string.Format(
 @"What is the new status of the car?
 0 - In repair
 1 - Repaired
