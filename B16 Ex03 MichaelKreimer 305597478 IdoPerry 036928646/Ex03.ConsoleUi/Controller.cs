@@ -232,6 +232,7 @@ namespace Ex03.ConsoleUi
             {
                 UI.PrintMessage(plateNumbr);
             }
+
             UI.PrintMessage(k_ReturnToMainMenuMessage);
             UI.GetInput();
         }
